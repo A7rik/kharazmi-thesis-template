@@ -1,0 +1,46 @@
+# ==========================================
+# Kharazmi University LaTeX Thesis Template
+# .gitignore Configuration
+# ==========================================
+
+# Reference documents and external materials
+how-to-write-thesis.pdf
+exmaples/
+other thesis templates/
+
+# Agent metadata and scratch directory
+.agents/
+
+# LaTeX auxiliary build artifacts
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.xdv
+*.bcf
+*.run.xml
+
+# Additional LaTeX & indexing intermediate files
+*.idx
+*.ind
+*.ilg
+*.glo
+*.gls
+*.glg
+*.nav
+*.snm
+*.vrb
+*.upa
+*.upb
+
+# OS generated files
+Thumbs.db
+.DS_Store
+Desktop.ini
