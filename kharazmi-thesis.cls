@@ -72,6 +72,7 @@
 \RequirePackage{caption}
 \RequirePackage{subcaption}
 \RequirePackage{float}
+\RequirePackage{newfloat}
 \RequirePackage{listings}
 \RequirePackage{algorithm}
 \RequirePackage{algorithmic}
@@ -169,10 +170,17 @@
 
 % -----------------------------------------------------------------------------
 % Float Definitions: Chart (نمودار)
+% Caption below chart matching Table 3-1 & Section 3-5
 % -----------------------------------------------------------------------------
-\newfloat{chart}{htbp}{loc}[chapter]
-\floatname{chart}{نمودار}
-\newcommand{\listofcharts}{\listof{chart}{فهرست نمودارها}}
+\DeclareFloatingEnvironment[
+  fileext=loc,
+  listname={فهرست نمودارها},
+  name={نمودار},
+  within=chapter,
+  placement=htbp
+]{chart}
+\captionsetup[chart]{position=below, skip=6pt}
+\providecommand{\listofcharts}{\listof{chart}{فهرست نمودارها}}
 \renewcommand{\thechart}{\thechapter-\arabic{chart}}
 
 % -----------------------------------------------------------------------------

@@ -48,8 +48,8 @@
   \setlatintextfont[Scale=0.875]{Times New Roman}
   \deflatinfont\enfullfont[Scale=1.0]{Times New Roman}
   \defpersianfont\titrfont[Scale=1.0, BoldFont={Vazirmatn Bold}]{Vazirmatn Bold}
-  \defpersianfont\zarfont[Scale=1.0]{Vazirmatn}
-  \defpersianfont\nazaninfont[Scale=1.0]{Vazirmatn}
+  \defpersianfont\zarfont[Scale=1.0, BoldFont={Vazirmatn Bold}]{Vazirmatn}
+  \defpersianfont\nazaninfont[Scale=1.0, BoldFont={Vazirmatn Bold}]{Vazirmatn}
 \else
   \if@usenazanin
     \settextfont[
@@ -64,8 +64,8 @@
     \setlatintextfont[Scale=0.875]{Times New Roman}
     \deflatinfont\enfullfont[Scale=1.0]{Times New Roman}
     \defpersianfont\titrfont[Scale=1.0, BoldFont={B Titr}]{B Titr}
-    \defpersianfont\zarfont[Mapping=persian-digits, Scale=1.08]{B Zar}
-    \defpersianfont\nazaninfont[Mapping=persian-digits, Scale=1.08]{B Nazanin}
+    \defpersianfont\zarfont[Mapping=persian-digits, Scale=1.08, BoldFont={B Zar Bold}]{B Zar}
+    \defpersianfont\nazaninfont[Mapping=persian-digits, Scale=1.08, BoldFont={B Nazanin Bold}]{B Nazanin}
   \else
     % Default: B Zar matching official guidelines Table 3-2
     \settextfont[
@@ -80,8 +80,8 @@
     \setlatintextfont[Scale=0.875]{Times New Roman}
     \deflatinfont\enfullfont[Scale=1.0]{Times New Roman}
     \defpersianfont\titrfont[Scale=1.0, BoldFont={B Titr}]{B Titr}
-    \defpersianfont\zarfont[Mapping=persian-digits, Scale=1.08]{B Zar}
-    \defpersianfont\nazaninfont[Mapping=persian-digits, Scale=1.08]{B Nazanin}
+    \defpersianfont\zarfont[Mapping=persian-digits, Scale=1.08, BoldFont={B Zar Bold}]{B Zar}
+    \defpersianfont\nazaninfont[Mapping=persian-digits, Scale=1.08, BoldFont={B Nazanin Bold}]{B Nazanin}
   \fi
 \fi
 
@@ -470,7 +470,7 @@
     \end{center}
     \vspace{0.5cm}
     \noindent
-    This is to certify that \@projectlabelen\ entitled:
+    This is to certify that this \if@phdthesis dissertation\else\if@bscthesis project report\else thesis\fi\fi\ entitled:
     \begin{center}
       \vspace{0.2cm}
       {\fontsize{14pt}{19pt}\selectfont\bfseries ``\@thesistitleen''}\par
@@ -616,9 +616,16 @@
   \clearpage
 }
 
-% Ensure bibliography section nomenclature matches Kharazmi guidelines
+% Ensure code listing captions render in RTL Persian with Persian digits
+% even when lstlisting is wrapped inside \begin{latin}
+\DeclareCaptionFormat{persianlst}{%
+  \parbox{\linewidth}{\begin{RTL}\centering\persianfont\fontsize{9pt}{12pt}\selectfont\bfseries #1#2#3\end{RTL}}%
+}
+
+% Ensure bibliography section nomenclature and listing caption setup
 \AtBeginDocument{%
   \renewcommand{\bibname}{فهرست منابع}%
+  \captionsetup[lstlisting]{format=persianlst, position=bottom, skip=6pt, singlelinecheck=false, justification=centering}%
 }
 
 \endinput
