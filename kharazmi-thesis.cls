@@ -106,6 +106,7 @@
 \renewcommand{\theequation}{\thechapter-\arabic{equation}}
 \renewcommand{\thefigure}{\thechapter-\arabic{figure}}
 \renewcommand{\thetable}{\thechapter-\arabic{table}}
+\renewcommand{\thealgorithm}{\thechapter-\arabic{algorithm}}
 
 % -----------------------------------------------------------------------------
 % Headings Formatting (titlesec)
@@ -230,8 +231,11 @@
   backgroundcolor=\color{gray!4}
 }
 \AtBeginDocument{%
-  \def\lstlistingname{\if@RTL کد\else Listing\fi}%
+  \def\lstlistingname{کد}%
   \def\lstlistlistingname{\if@RTL فهرست کدها\else Listings\fi}%
+  \renewcommand{\thelstlisting}{\thechapter-\arabic{lstlisting}}%
+  \renewcommand{\thealgorithm}{\thechapter-\arabic{algorithm}}%
+  \renewcommand{\bibname}{فهرست منابع}%
 }
 
 % -----------------------------------------------------------------------------
@@ -240,6 +244,7 @@
 \floatname{algorithm}{الگوریتم}
 \renewcommand{\listalgorithmname}{فهرست الگوریتم‌ها}
 \numberwithin{algorithm}{chapter}
+\renewcommand{\thealgorithm}{\thechapter-\arabic{algorithm}}
 
 \renewcommand{\algorithmicrequire}{\textbf{ورودی:}}
 \renewcommand{\algorithmicensure}{\textbf{خروجی:}}

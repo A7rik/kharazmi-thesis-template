@@ -141,15 +141,20 @@
 \def\@abstracten{}
 \def\@internaljudge{}
 \def\@internaljudgerank{}
+\def\@internaljudgetitleen{}
+\def\@internaljudgeen{}
 \def\@externaljudge{}
 \def\@externaljudgerank{}
 \def\@externaljudgeuniv{}
+\def\@externaljudgetitleen{}
+\def\@externaljudgeen{}
+\def\@externaljudgeujen{}
 \def\@graduatedeputy{}
 \def\@graduatedeputyrank{}
 
 % Default labels based on degree
 \if@phdthesis
-  \def\@thesisdegree{دکتری تخصصی (Ph.D.)}
+  \def\@thesisdegree{دکتری تخصصی \lr{(Ph.D.)}}
   \def\@thesisdegreeen{Doctor of Philosophy (Ph.D.)}
   \def\@projectlabel{رساله}
   \def\@projectlabelen{A Dissertation}
@@ -203,7 +208,9 @@
 \newcommand{\abstractfa}[1]{\def\@abstractfa{#1}}
 \newcommand{\abstracten}[1]{\def\@abstracten{#1}}
 \newcommand{\internaljudge}[2][]{\def\@internaljudgerank{#1}\def\@internaljudge{#2}}
+\newcommand{\internaljudgeen}[2][]{\def\@internaljudgetitleen{#1}\def\@internaljudgeen{#2}}
 \newcommand{\externaljudge}[3][]{\def\@externaljudgerank{#1}\def\@externaljudge{#2}\def\@externaljudgeuniv{#3}}
+\newcommand{\externaljudgeen}[3][]{\def\@externaljudgetitleen{#1}\def\@externaljudgeen{#2}\def\@externaljudgeujen{#3}}
 \newcommand{\graduatedeputy}[2][]{\def\@graduatedeputyrank{#1}\def\@graduatedeputy{#2}}
 
 % -----------------------------------------------------------------------------
@@ -463,7 +470,7 @@
     \end{center}
     \vspace{0.5cm}
     \noindent
-    This is to certify that the \@projectlabelen\ entitled:
+    This is to certify that \@projectlabelen\ entitled:
     \begin{center}
       \vspace{0.2cm}
       {\fontsize{14pt}{19pt}\selectfont\bfseries ``\@thesistitleen''}\par
@@ -490,8 +497,8 @@
         \ifx\@advisoren\@empty\else
           Advisor & \@advisoren & \\
         \fi
-        Internal Examiner & \ifx\@internaljudge\@empty\else Dr. \@internaljudge\fi & \\
-        External Examiner & \ifx\@externaljudge\@empty\else Dr. \@externaljudge\fi & \\
+        Internal Examiner & \ifx\@internaljudgeen\@empty\ifx\@internaljudge\@empty\else\rl{\@internaljudge}\fi\else\@internaljudgeen\fi & \\
+        External Examiner & \ifx\@externaljudgeen\@empty\ifx\@externaljudge\@empty\else\rl{\@externaljudge}\fi\else\@externaljudgeen\fi & \\
       \end{tabular}
     \end{center}
   \end{latin}
@@ -607,6 +614,11 @@
     \end{center}
   \end{latin}
   \clearpage
+}
+
+% Ensure bibliography section nomenclature matches Kharazmi guidelines
+\AtBeginDocument{%
+  \renewcommand{\bibname}{فهرست منابع}%
 }
 
 \endinput

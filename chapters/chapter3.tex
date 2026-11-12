@@ -113,7 +113,7 @@ p(\theta \mid \mathcal{D}) = \frac{p(\mathcal{D} \mid \theta) \, p(\theta)}{\int
 الگوریتم جامع بهینه‌سازی ساختار سند و آموزش مدل پیشنهادی در الگوریتم \ref{alg:ch3_optimization} با کلمات کلیدی فارسی به تصویر کشیده شده است. این الگوریتم با دریافت داده‌ها و فراسنج‌های اولیه، در هر دور فرآیند گرادیان کاهشی را اعمال کرده و شرایط توقف زودهنگام را می‌آزماید.
 
 \begin{algorithm}[htbp]
-\caption{الگوریتم آموزش و بهینه‌سازی پارامترهای مدل پیشنهادی}
+\caption{آموزش و بهینه‌سازی پارامترهای مدل پیشنهادی}
 \label{alg:ch3_optimization}
 \begin{algorithmic}[1]
 \REQUIRE مجموعه داده آموزشی $\mathcal{D}$، نرخ یادگیری $\eta$، تعداد کل دورها $E$، آستانه همگرایی $\epsilon$
@@ -129,11 +129,11 @@ p(\theta \mid \mathcal{D}) = \frac{p(\mathcal{D} \mid \theta) \, p(\theta)}{\int
   \STATE مقدار کل زیان را در پایان دور محاسبه کن: $L_e \leftarrow \mathcal{J}(\theta)$
   \STATE مقدار جدید را به تاریخچه بیفزا: $\mathcal{H} \leftarrow \mathcal{H} \cup \{L_e\}$
   \IF{$e > 1$ \AND $|L_e - L_{e-1}| < \epsilon$}
-    \STATE \PRINT پیام همگرایی پیش از موعد در دور $e$
-    \STATE \RETURN $\theta$
+    \PRINT پیام همگرایی پیش از موعد در دور $e$
+    \RETURN $\theta$
   \ENDIF
 \ENDFOR
-\STATE \RETURN $\theta$
+\RETURN $\theta$
 \end{algorithmic}
 \end{algorithm}
 

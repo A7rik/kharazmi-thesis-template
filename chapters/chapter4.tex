@@ -55,7 +55,9 @@
 \caption{ارزیابی مقایسه‌ای عملکرد مدل‌های مختلف در بازشناسی ساختار سند}
 \label{tab:model_performance}
 \vspace{4pt}
-\begin{tabular}{lcccccc}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lccccc}
 \toprule
 \textbf{مدل ارزیابی‌شده} & \textbf{دقت (\%)} & \textbf{بازخوانی (\%)} & \textbf{امتیاز $F_1$ (\%)} & \textbf{زمان کامپایل (\lr{s})} & \textbf{حافظه (\lr{MB})} \\
 \midrule
@@ -74,7 +76,9 @@
 \caption{ارزیابی انطباق اجزای قالب با شیوه‌نامه دانشگاه خوارزمی}
 \label{tab:detailed_breakdown}
 \vspace{4pt}
-\begin{tabular}{llccp{5cm}}
+\small
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{llccp{3.2cm}}
 \toprule
 \textbf{مؤلفه ساختاری} & \textbf{شاخص مورد سنجش} & \textbf{تعداد آزمون} & \textbf{نرخ موفقیت (\%)} & \textbf{وضعیت انطباق با شیوه‌نامه} \\
 \midrule
@@ -152,7 +156,7 @@
 برای مستندسازی کدهای محاسباتی در متن پایان‌نامه، محیط \lr{\texttt{listings}} به همراه شماره‌گذاری سطرها و کادر مشخص تعبیه شده است. کد \ref{lst:metric_eval} تابع پایتون جهت محاسبه خودکار ماتریس درهم‌ریختگی و معیارهای دقت، بازخوانی و امتیاز اف‌یک را نشان می‌دهد.
 
 \begin{latin}
-\begin{lstlisting}[language=Python, caption={\rl{تابع پایتون جهت محاسبه ماتریس درهم‌ریختگی و معیارهای ارزیابی}}]
+\begin{lstlisting}[language=Python, caption={\rl{پیاده‌سازی ماژول محاسبه معیارهای ارزیابی}}, label={lst:metric_eval}]
 import numpy as np
 
 def compute_evaluation_metrics(y_true, y_pred):
@@ -181,7 +185,6 @@ def compute_evaluation_metrics(y_true, y_pred):
         "confusion_matrix": confusion.tolist()
     }
 \end{lstlisting}
-\label{lst:metric_eval}
 \end{latin}
 
 \section{بحث و تحلیل حساسیت}
