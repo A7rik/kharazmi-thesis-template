@@ -29,9 +29,9 @@
 \ProcessOptions\relax
 
 % -----------------------------------------------------------------------------
-% Base Class Loading (A4 Paper, 12pt Base, Oneside)
+% Base Class Loading (A4 Paper, 12pt Base, Twoside openany for outer-edge headers)
 % -----------------------------------------------------------------------------
-\LoadClass[a4paper,12pt,oneside]{report}
+\LoadClass[a4paper,12pt,twoside,openany]{report}
 
 % -----------------------------------------------------------------------------
 % Page Geometry & Margins
@@ -185,13 +185,17 @@
 
 % -----------------------------------------------------------------------------
 % Header & Footer Styling (fancyhdr)
-% Word template / Guidelines format: [title]  |  [page]
-% Rule width: 0.6pt
-% Suppressed on chapter first page, covers, besmellah
+% Alternating outer-edge headers for Persian RTL duplex binding:
+%   Even pages (right-hand leaf): Top-Right [Title | Page] -> Page on outer right
+%   Odd pages  (left-hand leaf):  Top-Left  [Page | Chapter] -> Page on outer left
+% Rule width: 0.6pt (50% gray vertical separator matching guidelines)
+% Suppressed on chapter first page, covers, besmellah, blank pages
 % -----------------------------------------------------------------------------
+\providecommand{\khu@evenheadertitle}{\leftmark}
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\fontsize{12pt}{15pt}\selectfont\leftmark\quad\lr{|}\quad\thepage}
+\fancyhead[RE]{\rl{\fontsize{12pt}{15pt}\selectfont\thepage\quad\textcolor{black!50}{\lr{|}}\quad\khu@evenheadertitle}}
+\fancyhead[LO]{\rl{\fontsize{12pt}{15pt}\selectfont\leftmark\quad\textcolor{black!50}{\lr{|}}\quad\thepage}}
 \renewcommand{\headrulewidth}{0.6pt}
 \renewcommand{\footrulewidth}{0pt}
 
@@ -206,6 +210,20 @@
 }
 \newcommand{\setheader}[1]{%
   \markboth{#1}{}%
+}
+
+% Ensure blank verso pages inserted by \cleardoublepage have no headers
+\let\khu@orig@cleardoublepage\cleardoublepage
+\renewcommand{\cleardoublepage}{%
+  \clearpage
+  \if@twoside
+    \ifodd\c@page\else
+      \hbox{}%
+      \thispagestyle{empty}%
+      \newpage
+      \if@twocolumn\hbox{}\newpage\fi
+    \fi
+  \fi
 }
 
 % -----------------------------------------------------------------------------
@@ -283,7 +301,7 @@
 % Matter Partitioning Commands (Front, Main, Back Matter)
 % -----------------------------------------------------------------------------
 \newcommand{\frontmatter}{%
-  \cleardoublepage
+  \clearpage
   \if@harfifrontmatter
     \pagenumbering{harfi}
   \else
@@ -293,7 +311,7 @@
 }
 
 \newcommand{\mainmatter}{%
-  \cleardoublepage
+  \clearpage
   \if@harfifrontmatter
     \pagenumbering{arabic}
   \fi
@@ -301,7 +319,7 @@
 }
 
 \newcommand{\backmatter}{%
-  \cleardoublepage
+  \clearpage
 }
 
 \endinput

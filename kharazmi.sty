@@ -38,6 +38,7 @@
 % -----------------------------------------------------------------------------
 \if@usevazir
   \settextfont[
+    Mapping=persian-digits,
     Scale=1.0,
     BoldFont={Vazirmatn Bold},
     ItalicFont={Vazirmatn},
@@ -48,8 +49,8 @@
   \setlatintextfont[Scale=0.875]{Times New Roman}
   \deflatinfont\enfullfont[Scale=1.0]{Times New Roman}
   \defpersianfont\titrfont[Scale=1.0, BoldFont={Vazirmatn Bold}]{Vazirmatn Bold}
-  \defpersianfont\zarfont[Scale=1.0, BoldFont={Vazirmatn Bold}]{Vazirmatn}
-  \defpersianfont\nazaninfont[Scale=1.0, BoldFont={Vazirmatn Bold}]{Vazirmatn}
+  \defpersianfont\zarfont[Mapping=persian-digits, Scale=1.0, BoldFont={Vazirmatn Bold}]{Vazirmatn}
+  \defpersianfont\nazaninfont[Mapping=persian-digits, Scale=1.0, BoldFont={Vazirmatn Bold}]{Vazirmatn}
 \else
   \if@usenazanin
     \settextfont[
@@ -93,13 +94,18 @@
 }
 
 % -----------------------------------------------------------------------------
-% Footnote Sizing
+% Footnote Sizing & Persian Footnote Numbers
 % Persian footnote: 11pt
 % English footnote: 9pt
+% Ensure footnote mark numerals render in Persian digits for both RTL & LTR notes
 % -----------------------------------------------------------------------------
 \renewcommand{\footnotesize}{\fontsize{11pt}{14pt}\selectfont}
 \let\orig@LTRfootnote\LTRfootnote
 \renewcommand{\LTRfootnote}[1]{\orig@LTRfootnote{\fontsize{9pt}{12pt}\selectfont #1}}
+\footmarkstyle{\textsuperscript{\persianfont #1}}
+\LTRfootmarkstyle{\textsuperscript{\persianfont #1}}
+\RTLfootmarkstyle{\textsuperscript{\persianfont #1}}
+\renewcommand{\@makefnmark}{\hbox{\@textsuperscript{\normalfont\persianfont\@thefnmark}}}
 
 % -----------------------------------------------------------------------------
 % Metadata Macros & Storage
@@ -113,6 +119,7 @@
 \def\@department{گروه مهندسی کامپیوتر}
 \def\@departmenten{Department of Computer Engineering}
 \def\@thesistitle{عنوان پایان‌نامه}
+\def\@shortthesistitle{}
 \def\@thesistitleen{Thesis Title}
 \def\@authorname{نام دانشجو}
 \def\@authornameen{Student Name}
@@ -181,6 +188,8 @@
 \newcommand{\department}[1]{\def\@department{#1}}
 \newcommand{\departmenten}[1]{\def\@departmenten{#1}}
 \newcommand{\thesistitle}[1]{\def\@thesistitle{#1}\title{#1}}
+\newcommand{\shortthesistitle}[1]{\def\@shortthesistitle{#1}}
+\def\khu@evenheadertitle{\ifx\@shortthesistitle\@empty\@thesistitle\else\@shortthesistitle\fi}
 \newcommand{\thesistitleen}[1]{\def\@thesistitleen{#1}}
 \newcommand{\authorname}[1]{\def\@authorname{#1}\author{#1}}
 \newcommand{\authornameen}[1]{\def\@authornameen{#1}}
