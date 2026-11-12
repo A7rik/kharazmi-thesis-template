@@ -20,6 +20,7 @@ other thesis templates/
 *.toc
 *.lof
 *.lot
+*.loc
 *.synctex.gz
 *.fdb_latexmk
 *.fls
@@ -39,6 +40,9 @@ other thesis templates/
 *.vrb
 *.upa
 *.upb
+
+# Milestone verification tests
+test_m*.*
 
 # OS generated files
 Thumbs.db

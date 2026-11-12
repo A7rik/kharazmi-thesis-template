@@ -1,0 +1,608 @@
+%%
+%%  kharazmi.sty
+%%  Styling Package and Metadata Engine for Kharazmi University Thesis Template
+%%  Designed to conform to Kharazmi University guidelines (1402)
+%%
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{kharazmi}[2026/11/12 v1.0 Kharazmi Thesis Styling and Metadata Package]
+
+% -----------------------------------------------------------------------------
+% Package Options for Typography Selection
+% -----------------------------------------------------------------------------
+\newif\if@usevazir \@usevazirfalse
+\newif\if@usenazanin \@usenazaninfalse
+\newif\if@usebzar \@usebzartrue
+
+\DeclareOption{vazir}{\@usevazirtrue\@usenazaninfalse\@usebzarfalse}
+\DeclareOption{vazirmatn}{\@usevazirtrue\@usenazaninfalse\@usebzarfalse}
+\DeclareOption{bnazanin}{\@usevazirfalse\@usenazanintrue\@usebzarfalse}
+\DeclareOption{bzar}{\@usevazirfalse\@usenazaninfalse\@usebzartrue}
+\ProcessOptions\relax
+
+% -----------------------------------------------------------------------------
+% Load XePersian (Must be loaded after all other packages)
+% -----------------------------------------------------------------------------
+\@ifpackageloaded{xepersian}{}{%
+  \RequirePackage[extrafootnotefeatures]{xepersian}%
+}
+
+% Use hyphen (-) as hierarchical separator matching Kharazmi guidelines
+\SepMark{-}
+
+% -----------------------------------------------------------------------------
+% Font Configuration
+% Primary body font: B Zar 13pt (Scale=1.08 on 12pt base)
+% Inline English font: Times New Roman 10.5pt (Scale=0.875 on 12pt base)
+% Full English page font: Times New Roman 12pt (Scale=1.0)
+% Heading fonts: B Titr, B Zar Bold
+% -----------------------------------------------------------------------------
+\if@usevazir
+  \settextfont[
+    Scale=1.0,
+    BoldFont={Vazirmatn Bold},
+    ItalicFont={Vazirmatn},
+    ItalicFeatures={FakeSlant=0.18},
+    BoldItalicFont={Vazirmatn Bold},
+    BoldItalicFeatures={FakeSlant=0.18}
+  ]{Vazirmatn}
+  \setlatintextfont[Scale=0.875]{Times New Roman}
+  \deflatinfont\enfullfont[Scale=1.0]{Times New Roman}
+  \defpersianfont\titrfont[Scale=1.0, BoldFont={Vazirmatn Bold}]{Vazirmatn Bold}
+  \defpersianfont\zarfont[Scale=1.0]{Vazirmatn}
+  \defpersianfont\nazaninfont[Scale=1.0]{Vazirmatn}
+\else
+  \if@usenazanin
+    \settextfont[
+      Scale=1.08,
+      BoldFont={B Nazanin Bold},
+      ItalicFont={B Nazanin},
+      ItalicFeatures={FakeSlant=0.18},
+      BoldItalicFont={B Nazanin Bold},
+      BoldItalicFeatures={FakeSlant=0.18}
+    ]{B Nazanin}
+    \setlatintextfont[Scale=0.875]{Times New Roman}
+    \deflatinfont\enfullfont[Scale=1.0]{Times New Roman}
+    \defpersianfont\titrfont[Scale=1.0, BoldFont={B Titr}]{B Titr}
+    \defpersianfont\zarfont[Scale=1.08]{B Zar}
+    \defpersianfont\nazaninfont[Scale=1.08]{B Nazanin}
+  \else
+    % Default: B Zar matching official guidelines Table 3-2
+    \settextfont[
+      Scale=1.08,
+      BoldFont={B Zar Bold},
+      ItalicFont={B Zar},
+      ItalicFeatures={FakeSlant=0.18},
+      BoldItalicFont={B Zar Bold},
+      BoldItalicFeatures={FakeSlant=0.18}
+    ]{B Zar}
+    \setlatintextfont[Scale=0.875]{Times New Roman}
+    \deflatinfont\enfullfont[Scale=1.0]{Times New Roman}
+    \defpersianfont\titrfont[Scale=1.0, BoldFont={B Titr}]{B Titr}
+    \defpersianfont\zarfont[Scale=1.08]{B Zar}
+    \defpersianfont\nazaninfont[Scale=1.08]{B Nazanin}
+  \fi
+\fi
+
+% Nastaliq font (optional if available)
+\IfFontExistsTF{IranNastaliq}{%
+  \defpersianfont\nastaliqfont[Scale=1.2]{IranNastaliq}%
+}{%
+  \defpersianfont\nastaliqfont[Scale=1.08]{B Zar}%
+}
+
+% -----------------------------------------------------------------------------
+% Footnote Sizing
+% Persian footnote: 11pt
+% English footnote: 9pt
+% -----------------------------------------------------------------------------
+\renewcommand{\footnotesize}{\fontsize{11pt}{14pt}\selectfont}
+\let\orig@LTRfootnote\LTRfootnote
+\renewcommand{\LTRfootnote}[1]{\orig@LTRfootnote{\fontsize{9pt}{12pt}\selectfont #1}}
+
+% -----------------------------------------------------------------------------
+% Metadata Macros & Storage
+% -----------------------------------------------------------------------------
+\def\@university{دانشگاه خوارزمی}
+\def\@universityen{Kharazmi University}
+\def\@ministry{وزارت علوم، تحقیقات و فناوری}
+\def\@ministryen{Ministry of Science, Research and Technology}
+\def\@faculty{دانشکده مهندسی برق و کامپیوتر}
+\def\@facultyen{Faculty of Electrical and Computer Engineering}
+\def\@department{گروه مهندسی کامپیوتر}
+\def\@departmenten{Department of Computer Engineering}
+\def\@thesistitle{عنوان پایان‌نامه}
+\def\@thesistitleen{Thesis Title}
+\def\@authorname{نام دانشجو}
+\def\@authornameen{Student Name}
+\def\@studentid{}
+\def\@field{مهندسی کامپیوتر}
+\def\@fielden{Computer Engineering}
+\def\@major{هوش مصنوعی}
+\def\@majoren{Artificial Intelligence}
+\def\@supervisor{دکتر استاد راهنما}
+\def\@supervisoren{Dr. Supervisor Name}
+\def\@supervisorrank{استادیار}
+\def\@secondsupervisor{}
+\def\@secondsupervisoren{}
+\def\@secondsupervisorrank{}
+\def\@advisor{}
+\def\@advisoren{}
+\def\@advisorrank{}
+\def\@secondadvisor{}
+\def\@secondadvisoren{}
+\def\@secondadvisorrank{}
+\def\@thesisdate{شهریور ۱۴۰۳}
+\def\@thesisdateen{September 2024}
+\def\@keywords{کلیدواژه یک، کلیدواژه دو، کلیدواژه سه}
+\def\@keywordsen{Keyword 1, Keyword 2, Keyword 3}
+\def\@abstractfa{}
+\def\@abstracten{}
+\def\@internaljudge{}
+\def\@internaljudgerank{}
+\def\@externaljudge{}
+\def\@externaljudgerank{}
+\def\@externaljudgeuniv{}
+\def\@graduatedeputy{}
+\def\@graduatedeputyrank{}
+
+% Default labels based on degree
+\if@phdthesis
+  \def\@thesisdegree{دکتری تخصصی (Ph.D.)}
+  \def\@thesisdegreeen{Doctor of Philosophy (Ph.D.)}
+  \def\@projectlabel{رساله}
+  \def\@projectlabelen{A Dissertation}
+\else
+  \if@bscthesis
+    \def\@thesisdegree{کارشناسی}
+    \def\@thesisdegreeen{Bachelor of Science (B.Sc.)}
+    \def\@projectlabel{پروژه کارشناسی}
+    \def\@projectlabelen{A Project Report}
+  \else
+    \def\@thesisdegree{کارشناسی ارشد}
+    \def\@thesisdegreeen{Master of Science (M.Sc.)}
+    \def\@projectlabel{پایان‌نامه}
+    \def\@projectlabelen{A Thesis}
+  \fi
+\fi
+
+\newcommand{\university}[1]{\def\@university{#1}}
+\newcommand{\universityen}[1]{\def\@universityen{#1}}
+\newcommand{\faculty}[1]{\def\@faculty{#1}}
+\newcommand{\facultyen}[1]{\def\@facultyen{#1}}
+\newcommand{\department}[1]{\def\@department{#1}}
+\newcommand{\departmenten}[1]{\def\@departmenten{#1}}
+\newcommand{\thesistitle}[1]{\def\@thesistitle{#1}\title{#1}}
+\newcommand{\thesistitleen}[1]{\def\@thesistitleen{#1}}
+\newcommand{\authorname}[1]{\def\@authorname{#1}\author{#1}}
+\newcommand{\authornameen}[1]{\def\@authornameen{#1}}
+\newcommand{\studentid}[1]{\def\@studentid{#1}}
+\newcommand{\thesisdegree}[1]{\def\@thesisdegree{#1}}
+\newcommand{\thesisdegreeen}[1]{\def\@thesisdegreeen{#1}}
+\newcommand{\projectlabel}[1]{\def\@projectlabel{#1}}
+\newcommand{\projectlabelen}[1]{\def\@projectlabelen{#1}}
+\newcommand{\field}[1]{\def\@field{#1}}
+\newcommand{\fielden}[1]{\def\@fielden{#1}}
+\newcommand{\major}[1]{\def\@major{#1}}
+\newcommand{\majoren}[1]{\def\@majoren{#1}}
+\newcommand{\supervisor}[2][]{\def\@supervisorrank{#1}\def\@supervisor{#2}}
+\newcommand{\supervisoren}[1]{\def\@supervisoren{#1}}
+\newcommand{\secondsupervisor}[2][]{\def\@secondsupervisorrank{#1}\def\@secondsupervisor{#2}}
+\newcommand{\secondsupervisoren}[1]{\def\@secondsupervisoren{#1}}
+\newcommand{\advisor}[2][]{\def\@advisorrank{#1}\def\@advisor{#2}}
+\newcommand{\advisoren}[1]{\def\@advisoren{#1}}
+\newcommand{\secondadvisor}[2][]{\def\@secondadvisorrank{#1}\def\@secondadvisor{#2}}
+\newcommand{\secondadvisoren}[1]{\def\@secondadvisoren{#1}}
+\newcommand{\thesisdate}[1]{\def\@thesisdate{#1}\date{#1}}
+\newcommand{\thesisdateen}[1]{\def\@thesisdateen{#1}}
+\newcommand{\keywords}[1]{\def\@keywords{#1}}
+\newcommand{\keywordsen}[1]{\def\@keywordsen{#1}}
+\newcommand{\abstractfa}[1]{\def\@abstractfa{#1}}
+\newcommand{\abstracten}[1]{\def\@abstracten{#1}}
+\newcommand{\internaljudge}[2][]{\def\@internaljudgerank{#1}\def\@internaljudge{#2}}
+\newcommand{\externaljudge}[3][]{\def\@externaljudgerank{#1}\def\@externaljudge{#2}\def\@externaljudgeuniv{#3}}
+\newcommand{\graduatedeputy}[2][]{\def\@graduatedeputyrank{#1}\def\@graduatedeputy{#2}}
+
+% -----------------------------------------------------------------------------
+% Utility Shortcuts for Bilingual and Formatting
+% -----------------------------------------------------------------------------
+\newcommand{\en}[1]{\lr{#1}}
+\newcommand{\fa}[1]{\rl{#1}}
+\newcommand{\persianToEnglish}[2]{\par\noindent{#1}\dotfill\lr{#2}\par}
+\newcommand{\englishToPersian}[2]{\par\noindent\lr{#1}\dotfill{#2}\par}
+\newcommand{\symb}[2]{\par\noindent\makebox[3cm][r]{$\displaystyle #1$}\quad #2\par}
+\newcommand{\blankpage}{\clearpage\thispagestyle{empty}\null\clearpage}
+
+% -----------------------------------------------------------------------------
+% Front Matter Page Generation Commands
+% -----------------------------------------------------------------------------
+
+% 1. Persian Outer Cover Page
+\newcommand{\makefaCover}{%
+  \begin{titlepage}
+    \thispagestyle{empty}
+    \begin{center}
+      \includegraphics[height=3.2cm]{khu_logo.png}\par
+      \vspace{0.4cm}
+      {\fontsize{14pt}{17pt}\selectfont\bfseries \@ministry}\par
+      \vspace{0.2cm}
+      {\fontsize{16pt}{20pt}\selectfont\bfseries\titrfont \@university}\par
+      \vspace{0.2cm}
+      {\fontsize{13pt}{16pt}\selectfont\bfseries \@faculty}\par
+      \vspace{0.15cm}
+      {\fontsize{12pt}{15pt}\selectfont\bfseries \@department}\par
+      \vspace{1.0cm}
+      {\fontsize{13pt}{16pt}\selectfont\bfseries \@projectlabel\ برای دریافت درجه \@thesisdegree}\par
+      \vspace{0.2cm}
+      {\fontsize{12pt}{15pt}\selectfont\bfseries در رشته \@field\ifx\@major\@empty\else\ (گرایش \@major)\fi}\par
+      \vspace{1.2cm}
+      {\fontsize{13pt}{16pt}\selectfont\bfseries عنوان:}\par
+      \vspace{0.3cm}
+      {\fontsize{17pt}{24pt}\selectfont\bfseries\titrfont \@thesistitle}\par
+      \vspace{1.4cm}
+      {\fontsize{12pt}{15pt}\selectfont نگارش:}\par
+      \vspace{0.2cm}
+      {\fontsize{14pt}{17pt}\selectfont\bfseries \@authorname}\par
+      \vspace{1.0cm}
+      {\fontsize{12pt}{15pt}\selectfont استاد(ان) راهنما:}\par
+      \vspace{0.2cm}
+      {\fontsize{13pt}{16pt}\selectfont\bfseries \ifx\@supervisorrank\@empty\else\@supervisorrank\ \fi\@supervisor}\par
+      \ifx\@secondsupervisor\@empty\else
+        \vspace{0.1cm}
+        {\fontsize{13pt}{16pt}\selectfont\bfseries \ifx\@secondsupervisorrank\@empty\else\@secondsupervisorrank\ \fi\@secondsupervisor}\par
+      \fi
+      \ifx\@advisor\@empty\else
+        \vspace{0.5cm}
+        {\fontsize{12pt}{15pt}\selectfont استاد(ان) مشاور:}\par
+        \vspace{0.2cm}
+        {\fontsize{13pt}{16pt}\selectfont\bfseries \ifx\@advisorrank\@empty\else\@advisorrank\ \fi\@advisor}\par
+        \ifx\@secondadvisor\@empty\else
+          \vspace{0.1cm}
+          {\fontsize{13pt}{16pt}\selectfont\bfseries \ifx\@secondadvisorrank\@empty\else\@secondadvisorrank\ \fi\@secondadvisor}\par
+        \fi
+      \fi
+      \vfill
+      {\fontsize{12pt}{15pt}\selectfont\bfseries \@thesisdate}\par
+    \end{center}
+  \end{titlepage}
+  \clearpage
+}
+
+% 2. Besmellah Page
+\newcommand{\makeBesm}{%
+  \clearpage
+  \thispagestyle{empty}
+  \vspace*{\fill}
+  \begin{center}
+    \IfFileExists{images/besmellah.png}{%
+      \includegraphics[width=10cm]{besmellah.png}%
+    }{%
+      \IfFileExists{images/besm.png}{%
+        \includegraphics[width=10cm]{besm.png}%
+      }{%
+        {\fontsize{24pt}{32pt}\selectfont\nastaliqfont بسم الله الرحمن الرحیم}%
+      }%
+    }
+  \end{center}
+  \vspace*{\fill}
+  \clearpage
+}
+
+% 3. Persian Inner Title Page
+\newcommand{\makefaTitle}{%
+  \makefaCover
+}
+
+% 4. Committee Approval / Defense Sheet
+\newcommand{\makeApproval}{%
+  \clearpage
+  \thispagestyle{empty}
+  \begin{center}
+    \includegraphics[height=2.3cm]{khu_logo.png}\par
+    \vspace{0.2cm}
+    {\fontsize{13pt}{16pt}\selectfont\bfseries \@university}\par
+    {\fontsize{12pt}{15pt}\selectfont\bfseries \@faculty}\par
+    \vspace{0.4cm}
+    {\fontsize{15pt}{19pt}\selectfont\bfseries\titrfont صورت‌جلسه دفاع از \@projectlabel}\par
+  \end{center}
+  \vspace{0.5cm}
+  \noindent
+  جلسه دفاع از \@projectlabel\ \@thesisdegree\ آقای/خانم \textbf{\@authorname}
+  \ifx\@studentid\@empty\else\ به شماره دانشجویی \textbf{\@studentid}\fi\
+  در رشته \textbf{\@field}\ifx\@major\@empty\else\ گرایش \textbf{\@major}\fi\
+  با عنوان:
+  \begin{center}
+    \vspace{0.2cm}
+    {\fontsize{14pt}{19pt}\selectfont\bfseries «\@thesistitle»}\par
+  \end{center}
+  \vspace{0.3cm}
+  \noindent
+  در تاریخ \textbf{\@thesisdate} با حضور هیئت داوران تشکیل و با درجه .................... و نمره ............ به تصویب رسید.
+  \par
+  \vspace{0.8cm}
+  \noindent
+  \textbf{هیئت داوران:}
+  \par\vspace{0.4cm}
+  \begin{center}
+    \renewcommand{\arraystretch}{2.2}
+    \begin{tabular}{p{4.5cm}p{4.5cm}p{3.5cm}}
+      \textbf{سمت} & \textbf{نام و نام خانوادگی} & \textbf{امضا} \\
+      استاد راهنما & \ifx\@supervisorrank\@empty\else\@supervisorrank\ \fi\@supervisor & \\
+      \ifx\@secondsupervisor\@empty\else
+        استاد راهنمای دوم & \ifx\@secondsupervisorrank\@empty\else\@secondsupervisorrank\ \fi\@secondsupervisor & \\
+      \fi
+      \ifx\@advisor\@empty\else
+        استاد مشاور & \ifx\@advisorrank\@empty\else\@advisorrank\ \fi\@advisor & \\
+      \fi
+      داور داخلی & \ifx\@internaljudgerank\@empty\else\@internaljudgerank\ \fi\@internaljudge & \\
+      داور خارجی & \ifx\@externaljudgerank\@empty\else\@externaljudgerank\ \fi\@externaljudge & \\
+    \end{tabular}
+  \end{center}
+  \clearpage
+}
+
+% 5. Declaration of Originality Page
+\newcommand{\makeDeclaration}{%
+  \clearpage
+  \thispagestyle{empty}
+  \begin{center}
+    {\fontsize{15pt}{19pt}\selectfont\bfseries\titrfont تعهدنامه اصالت اثر}\par
+  \end{center}
+  \vspace{0.8cm}
+  \noindent
+  اینجانب \textbf{\@authorname} دانش‌آموخته مقطع \@thesisdegree\ در رشته \@field\
+  \ifx\@major\@empty\else گرایش \@major\fi\ دانشگاه خوارزمی، تأیید می‌نمایم که کلیه نتایج مندرج در این \@projectlabel\
+  حاصل پژوهش و فعالیت علمی خود اینجانب بوده و در صورت استفاده از دستاوردها و نتایج علمی دیگران،
+  مشخصات کامل منبع استناد شده، بر اساس موازین و ضوابط علمی در متن پایان‌نامه و فهرست منابع ذکر شده است.
+  همچنین این اثر قبلاً برای دریافت هیچ مدرک تحصیلی دیگری در این دانشگاه یا سایر مؤسسات ارائه نگردیده است.
+  \par
+  \vspace{2.5cm}
+  \begin{flushleft}
+    \textbf{نام و نام خانوادگی دانشجو:} \@authorname\par
+    \vspace{0.3cm}
+    \textbf{امضا و تاریخ:} \hspace{4cm}
+  \end{flushleft}
+  \clearpage
+}
+
+% 6. Dedication Page
+\newcommand{\makeDedication}[2][تقدیم]{%
+  \clearpage
+  \thispagestyle{empty}
+  \vspace*{2.5cm}
+  \begin{center}
+    {\fontsize{16pt}{20pt}\selectfont\bfseries\titrfont #1}\par
+  \end{center}
+  \vspace{1.2cm}
+  \begin{center}
+    \fontsize{13pt}{20pt}\selectfont
+    #2
+  \end{center}
+  \vfill
+  \clearpage
+}
+
+% 7. Acknowledgments Page
+\newcommand{\makeAck}[2][سپاسگزاری]{%
+  \clearpage
+  \thispagestyle{empty}
+  \begin{center}
+    {\fontsize{16pt}{20pt}\selectfont\bfseries\titrfont #1}\par
+  \end{center}
+  \vspace{0.8cm}
+  \par
+  \fontsize{12pt}{19pt}\selectfont
+  #2
+  \par
+  \vfill
+  \clearpage
+}
+
+% 8. Persian Abstract Page
+\newcommand{\makeAbstractFa}{%
+  \clearpage
+  \thispagestyle{plain}
+  \setheader{چکیده}
+  \begin{center}
+    {\fontsize{13pt}{16pt}\selectfont\bfseries\titrfont چکیده}\par
+  \end{center}
+  \vspace{0.6cm}
+  \par
+  \fontsize{12pt}{18pt}\selectfont
+  \@abstractfa
+  \par
+  \vspace{1.0cm}
+  \noindent
+  {\fontsize{12pt}{16pt}\selectfont\bfseries کلیدواژه‌ها:}\ \@keywords
+  \clearpage
+}
+
+% 9. English Abstract Page
+\newcommand{\makeAbstractEn}{%
+  \clearpage
+  \thispagestyle{plain}
+  \begin{latin}
+    \enfullfont
+    \setheader{Abstract}
+    \begin{center}
+      {\fontsize{14pt}{18pt}\selectfont\bfseries Abstract}\par
+      \vspace{0.5cm}
+      {\fontsize{13pt}{18pt}\selectfont\bfseries \@thesistitleen}\par
+      \vspace{0.4cm}
+      {\fontsize{12pt}{16pt}\selectfont By: \textbf{\@authornameen}}\par
+      \vspace{0.2cm}
+      {\fontsize{12pt}{16pt}\selectfont Supervised by: \textbf{\@supervisoren}}\par
+    \end{center}
+    \vspace{0.6cm}
+    \fontsize{12pt}{18pt}\selectfont
+    \@abstracten
+    \par
+    \vspace{1.0cm}
+    \noindent
+    \textbf{Keywords:}\ \@keywordsen
+  \end{latin}
+  \clearpage
+}
+
+% 10. English Approval Sheet (Certification of Defense)
+\newcommand{\makeApprovalEn}{%
+  \clearpage
+  \thispagestyle{empty}
+  \begin{latin}
+    \enfullfont
+    \begin{center}
+      \includegraphics[height=2.3cm]{khu_logo.png}\par
+      \vspace{0.2cm}
+      {\fontsize{13pt}{16pt}\selectfont\bfseries \@universityen}\par
+      {\fontsize{12pt}{15pt}\selectfont\bfseries \@facultyen}\par
+      \vspace{0.4cm}
+      {\fontsize{15pt}{19pt}\selectfont\bfseries Certification of Thesis Defense}\par
+    \end{center}
+    \vspace{0.5cm}
+    \noindent
+    This is to certify that the \@projectlabelen\ entitled:
+    \begin{center}
+      \vspace{0.2cm}
+      {\fontsize{14pt}{19pt}\selectfont\bfseries ``\@thesistitleen''}\par
+    \end{center}
+    \vspace{0.2cm}
+    \noindent
+    submitted by \textbf{\@authornameen}\ifx\@studentid\@empty\else\ (Student ID: \textbf{\@studentid})\fi\
+    in partial fulfillment of the requirements for the degree of \textbf{\@thesisdegreeen}\
+    in \textbf{\@fielden}\ifx\@majoren\@empty\else\ (\@majoren)\fi\
+    has been evaluated and approved by the defense committee on \textbf{\@thesisdateen}.
+    \par
+    \vspace{0.8cm}
+    \noindent
+    \textbf{Defense Committee Members:}
+    \par\vspace{0.4cm}
+    \begin{center}
+      \renewcommand{\arraystretch}{2.2}
+      \begin{tabular}{p{4.5cm}p{5cm}p{3.5cm}}
+        \textbf{Role} & \textbf{Name} & \textbf{Signature} \\
+        Supervisor & \@supervisoren & \\
+        \ifx\@secondsupervisoren\@empty\else
+          Second Supervisor & \@secondsupervisoren & \\
+        \fi
+        \ifx\@advisoren\@empty\else
+          Advisor & \@advisoren & \\
+        \fi
+        Internal Examiner & \ifx\@internaljudge\@empty\else Dr. \@internaljudge\fi & \\
+        External Examiner & \ifx\@externaljudge\@empty\else Dr. \@externaljudge\fi & \\
+      \end{tabular}
+    \end{center}
+  \end{latin}
+  \clearpage
+}
+
+% 11. Author CV (کارنامک)
+\newcommand{\makeCV}[1]{%
+  \clearpage
+  \thispagestyle{plain}
+  \setheader{کارنامک}
+  \chapter*{کارنامک}
+  \addcontentsline{toc}{chapter}{کارنامک}
+  #1
+  \clearpage
+}
+
+% 12. List of Publications Extracted from Thesis
+\newcommand{\listofpublications}[1]{%
+  \clearpage
+  \thispagestyle{plain}
+  \setheader{فهرست مقالات مستخرج از پایان‌نامه}
+  \chapter*{فهرست مقالات مستخرج از پایان‌نامه}
+  \addcontentsline{toc}{chapter}{فهرست مقالات مستخرج از پایان‌نامه}
+  #1
+  \clearpage
+}
+
+% 13. Descriptive Glossary Environment
+\newenvironment{descriptiveglossary}{%
+  \clearpage
+  \thispagestyle{plain}
+  \setheader{واژه‌نامه توصیفی}
+  \chapter*{واژه‌نامه توصیفی}
+  \addcontentsline{toc}{chapter}{واژه‌نامه توصیفی}
+  \begin{description}[leftmargin=2cm, style=nextline]
+}{%
+  \end{description}
+  \clearpage
+}
+
+% 14. List of Symbols & Abbreviations Shortcuts
+\newcommand{\listofsymbols}[1]{%
+  \clearpage
+  \thispagestyle{plain}
+  \setheader{فهرست نشانه‌ها و نمادها}
+  \chapter*{فهرست نشانه‌ها و نمادها}
+  \addcontentsline{toc}{chapter}{فهرست نشانه‌ها و نمادها}
+  #1
+  \clearpage
+}
+
+\newcommand{\listofabbreviations}[1]{%
+  \clearpage
+  \thispagestyle{plain}
+  \setheader{فهرست کوته‌نوشت‌ها}
+  \chapter*{فهرست کوته‌نوشت‌ها}
+  \addcontentsline{toc}{chapter}{فهرست کوته‌نوشت‌ها}
+  #1
+  \clearpage
+}
+
+% 15. English Back Cover Page
+\newcommand{\makeEnCover}{%
+  \clearpage
+  \thispagestyle{empty}
+  \begin{latin}
+    \enfullfont
+    \begin{center}
+      \includegraphics[height=3.2cm]{khu_logo.png}\par
+      \vspace{0.4cm}
+      {\fontsize{13pt}{16pt}\selectfont\bfseries \@ministryen}\par
+      \vspace{0.2cm}
+      {\fontsize{16pt}{20pt}\selectfont\bfseries \@universityen}\par
+      \vspace{0.2cm}
+      {\fontsize{13pt}{16pt}\selectfont\bfseries \@facultyen}\par
+      \vspace{0.15cm}
+      {\fontsize{12pt}{15pt}\selectfont\bfseries \@departmenten}\par
+      \vspace{1.0cm}
+      {\fontsize{12pt}{15pt}\selectfont \@projectlabelen\ Submitted in Partial Fulfillment of the Requirements for}\par
+      \vspace{0.15cm}
+      {\fontsize{12pt}{15pt}\selectfont the Degree of \textbf{\@thesisdegreeen}}\par
+      \vspace{0.15cm}
+      {\fontsize{12pt}{15pt}\selectfont In \textbf{\@fielden}\ifx\@majoren\@empty\else\ (\@majoren)\fi}\par
+      \vspace{1.2cm}
+      {\fontsize{13pt}{16pt}\selectfont Title:}\par
+      \vspace{0.3cm}
+      {\fontsize{17pt}{22pt}\selectfont\bfseries \@thesistitleen}\par
+      \vspace{1.4cm}
+      {\fontsize{12pt}{15pt}\selectfont By:}\par
+      \vspace{0.2cm}
+      {\fontsize{14pt}{17pt}\selectfont\bfseries \@authornameen}\par
+      \vspace{1.0cm}
+      {\fontsize{12pt}{15pt}\selectfont Supervised by:}\par
+      \vspace{0.2cm}
+      {\fontsize{13pt}{16pt}\selectfont\bfseries \@supervisoren}\par
+      \ifx\@secondsupervisoren\@empty\else
+        \vspace{0.1cm}
+        {\fontsize{13pt}{16pt}\selectfont\bfseries \@secondsupervisoren}\par
+      \fi
+      \ifx\@advisoren\@empty\else
+        \vspace{0.5cm}
+        {\fontsize{12pt}{15pt}\selectfont Advised by:}\par
+        \vspace{0.2cm}
+        {\fontsize{13pt}{16pt}\selectfont\bfseries \@advisoren}\par
+        \ifx\@secondadvisoren\@empty\else
+          \vspace{0.1cm}
+          {\fontsize{13pt}{16pt}\selectfont\bfseries \@secondadvisoren}\par
+        \fi
+      \fi
+      \vfill
+      {\fontsize{12pt}{15pt}\selectfont\bfseries \@thesisdateen}\par
+    \end{center}
+  \end{latin}
+  \clearpage
+}
+
+\endinput
