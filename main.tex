@@ -1,0 +1,171 @@
+%% ============================================================================
+%%  main.tex
+%%  قالب رسمی پایان‌نامه‌ها و رساله‌های دانشگاه خوارزمی
+%%  Kharazmi University Official Persian LaTeX Thesis Template
+%% ============================================================================
+%%
+%%  راهنمای سریع کامپایل:
+%%  این قالب باید با موتور XeLaTeX همراه با BibTeX و MakeIndex کامپایل شود.
+%%  ترتیب دستورات کامپایل در خط فرمان:
+%%      xelatex -interaction=nonstopmode main.tex
+%%      bibtex main
+%%      makeindex main
+%%      xelatex -interaction=nonstopmode main.tex
+%%      xelatex -interaction=nonstopmode main.tex
+%%
+%%  گزینه‌های کلاس kharazmi-thesis:
+%%      msc               : پایان‌نامه کارشناسی ارشد (پیش‌فرض)
+%%      phd               : رساله دکتری تخصصی
+%%      bsc               : پروژه کارشناسی
+%%      harfifrontmatter  : شماره‌گذاری حروفی صفحات آغازین (اختیاری)
+%%
+%% ============================================================================
+
+\documentclass[msc]{kharazmi-thesis}
+
+% بارگذاری بسته تنظیمات ظاهری، فونت‌ها و فراداده‌های دانشگاه خوارزمی
+% گزینه‌های فونت: bzar (پیش‌فرض مصوب)، bnazanin، vazirmatn
+\usepackage{kharazmi}
+
+% فعال‌سازی سامانه نمایه موضوعی و الفبایی
+\makeindex
+
+% -----------------------------------------------------------------------------
+% ۱. تنظیمات مشخصات و فراداده‌های پایان‌نامه (Metadata)
+% -----------------------------------------------------------------------------
+\university{دانشگاه خوارزمی}
+\universityen{Kharazmi University}
+
+\ministry{وزارت علوم، تحقیقات و فناوری}
+\ministryen{Ministry of Science, Research and Technology}
+
+\faculty{دانشکده مهندسی برق و کامپیوتر}
+\facultyen{Faculty of Electrical and Computer Engineering}
+
+\department{گروه مهندسی کامپیوتر}
+\departmenten{Department of Computer Engineering}
+
+% عنوان پایان‌نامه به فارسی و انگلیسی
+\thesistitle{طراحی و پیاده‌سازی قالب جامع پایان‌نامه دانشگاه خوارزمی در سامانه لاتک}
+\thesistitleen{Design and Implementation of Kharazmi University Comprehensive LaTeX Thesis Template}
+
+% مشخصات نویسنده
+\authorname{آیریک پژوهشگر}
+\authornameen{Ayrik Researcher}
+\studentid{1402123456}
+
+% مقطع و رشته تحصیلی
+\field{مهندسی کامپیوتر}
+\fielden{Computer Engineering}
+\major{هوش مصنوعی}
+\majoren{Artificial Intelligence}
+
+% استادان راهنما و مشاور
+\supervisor[دانشیار]{دکتر احمد رضایی}
+\supervisoren{Dr. Ahmad Rezaei}
+
+\advisor[استادیار]{دکتر سارا محمدی}
+\advisoren{Dr. Sara Mohammadi}
+
+% اعضای هیئت داوران جلسه دفاع
+\internaljudge[استاد]{دکتر علی علوی}
+\externaljudge[دانشیار]{دکتر رضا اکبری}{دانشگاه تهران}
+
+% تاریخ دفاع و فارغ‌التحصیلی
+\thesisdate{شهریور ۱۴۰۳}
+\thesisdateen{September 2024}
+
+% کلیدواژه‌ها به زبان فارسی و انگلیسی
+\keywords{قالب پایان‌نامه، دانشگاه خوارزمی، زی‌پرشین، حروف‌چینی علمی، مراجع دوزبانه.}
+\keywordsen{Thesis Template, Kharazmi University, XePersian, Academic Typesetting, Bilingual Bibliography.}
+
+% =============================================================================
+% شروع بدنه اصلی سند
+% =============================================================================
+\begin{document}
+
+% -----------------------------------------------------------------------------
+% بخش اول: صفحات آغازین پیش از متن (Front Matter)
+% ترتیب صفحات بر اساس جدول ۲-۱ شیوه‌نامه نگارش دانشگاه خوارزمی:
+% جلد -> بسم‌الله (صفحه ۱) -> تعهدنامه -> تصویب‌نامه -> تقدیم -> سپاسگزاری -> چکیده
+% -----------------------------------------------------------------------------
+\input{front/cover_fa.tex}        % ۱. صفحه جلد فارسی
+
+\frontmatter                      % شروع شماره‌گذاری پیوسته از ۱ از صفحه بعد
+
+\input{front/besmellah.tex}       % ۲. صفحه بسم‌الله الرحمن الرحیم (صفحه ۱)
+\input{front/declaration.tex}     % ۳. تعهدنامه اصالت و مالکیت اثر
+\input{front/approval.tex}        % ۴. صورت‌جلسه دفاع و تصویب‌نامه هیئت داوران
+\input{front/dedication.tex}      % ۵. صفحه تقدیم
+\input{front/acknowledgments.tex} % ۶. صفحه سپاسگزاری
+\input{front/abstract_fa.tex}     % ۷. چکیده فارسی و کلیدواژه‌ها
+
+% -----------------------------------------------------------------------------
+% فهرست‌های خودکار و جداول نشانه‌ها (Lists)
+% -----------------------------------------------------------------------------
+\tableofcontents                  % فهرست مطالب
+\listoffigures                    % فهرست شکل‌ها
+\listoftables                     % فهرست جدول‌ها
+\listofcharts                     % فهرست نمودارها
+
+% فهرست نشانه‌ها و نمادهای ریاضی (اختیاری)
+\listofsymbols{
+\symb{\alpha}{نرخ یادگیری در الگوریتم‌های بهینه‌سازی}
+\symb{\beta}{ضریب تکانه گرادیان در میانگین متحرک}
+\symb{\nabla f(x)}{بردار گرادیان تابع هدف در نقطه $x$}
+\symb{\mathcal{L}(\theta)}{تابع زیان تجربی روی نمونه‌های آموزشی}
+\symb{\mathbf{Q}, \mathbf{K}, \mathbf{V}}{ماتریس‌های پرسش، کلید و مقدار در لایه توجه خودکار}
+}
+
+% فهرست کوته‌نوشت‌ها و کلمات اختصاری (اختیاری)
+\listofabbreviations{
+\persianToEnglish{هوش مصنوعی}{AI: Artificial Intelligence}
+\persianToEnglish{پردازش زبان طبیعی}{NLP: Natural Language Processing}
+\persianToEnglish{شبکه عصبی پیچشی}{CNN: Convolutional Neural Network}
+\persianToEnglish{شبکه عصبی عمیق}{DNN: Deep Neural Network}
+\persianToEnglish{مدل زبان بزرگ}{LLM: Large Language Model}
+}
+
+% -----------------------------------------------------------------------------
+% بخش دوم: فصول پنج‌گانه متن اصلی (Main Matter)
+% -----------------------------------------------------------------------------
+\mainmatter
+\include{chapters/chapter1}       % فصل ۱: کلیات پژوهش
+\include{chapters/chapter2}       % فصل ۲: پیشینه پژوهش و مبانی نظری
+\include{chapters/chapter3}       % فصل ۳: روش‌شناسی و مدل پیشنهادی
+\include{chapters/chapter4}       % فصل ۴: یافته‌ها و تحلیل نتایج
+\include{chapters/chapter5}       % فصل ۵: نتیجه‌گیری و پیشنهادات پژوهشی
+
+% -----------------------------------------------------------------------------
+% مراجع و منابع دوزبانه (Bibliography)
+% -----------------------------------------------------------------------------
+\bibliographystyle{plain-fa}
+\bibliography{references}
+
+% -----------------------------------------------------------------------------
+% بخش سوم: صفحات پایانی و پیوست‌ها (Back Matter)
+% -----------------------------------------------------------------------------
+\backmatter
+
+% پیوست‌ها
+\appendix
+\include{back/appendix1}          % پیوست الف: اثبات قضیه‌ها و جزئیات محاسباتی
+
+% واژه‌نامه‌ها، مقالات مستخرج و کارنامک علمی
+\include{back/glossary}           % واژه‌نامه‌های سه‌گانه (توصیفی، فارسی-انگلیسی، انگلیسی-فارسی)
+\include{back/publications}       % فهرست مقالات مستخرج از پایان‌نامه
+\include{back/cv}                 % کارنامک و سوابق علمی-تحصیلی نویسنده
+
+% نمایه موضوعی و الفبایی
+\clearpage
+\setheader{نمایه}
+\phantomsection
+\addcontentsline{toc}{chapter}{نمایه}
+\printindex
+
+% برگه‌های نهایی انگلیسی
+\include{back/approval_en}        % تأییدیه دفاع به زبان انگلیسی
+\include{back/abstract_en}        % چکیده به زبان انگلیسی
+\include{back/cover_en}           % صفحه جلد انگلیسی (پشت جلد)
+
+\end{document}

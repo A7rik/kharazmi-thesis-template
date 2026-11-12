@@ -44,7 +44,7 @@
   bottom=2.5cm,
   right=3.0cm,
   left=3.0cm,
-  headheight=15pt,
+  headheight=17pt,
   headsep=0.8cm,
   footskip=0.8cm
 ]{geometry}
@@ -67,12 +67,16 @@
 \RequirePackage{titlesec}
 \RequirePackage{titletoc}
 \RequirePackage[titles]{tocloft}
+\RequirePackage{booktabs}
+\RequirePackage{multirow}
 \RequirePackage{caption}
+\RequirePackage{subcaption}
 \RequirePackage{float}
 \RequirePackage{listings}
 \RequirePackage{algorithm}
 \RequirePackage{algorithmic}
 \RequirePackage[perpage]{footmisc}
+\RequirePackage{makeidx}
 \RequirePackage[
   unicode=true,
   bookmarks=true,
@@ -255,6 +259,12 @@
 \renewcommand{\algorithmicuntil}{\textbf{تا زمانی که}}
 \renewcommand{\algorithmicprint}{\textbf{چاپ کن}}
 \renewcommand{\algorithmicreturn}{\textbf{بازگردان}}
+\renewcommand{\algorithmicto}{\textbf{تا}}
+\renewcommand{\algorithmicand}{\textbf{و}}
+\renewcommand{\algorithmicor}{\textbf{یا}}
+\renewcommand{\algorithmicnot}{\textbf{نقیض}}
+\renewcommand{\algorithmictrue}{\textbf{درست}}
+\renewcommand{\algorithmicfalse}{\textbf{نادرست}}
 
 % -----------------------------------------------------------------------------
 % Matter Partitioning Commands (Front, Main, Back Matter)
