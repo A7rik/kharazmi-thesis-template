@@ -1,0 +1,84 @@
+%% ============================================================================
+%%  back/appendix1.tex
+%%  پیوست الف: اثبات قضیه‌ها و جزئیات محاسباتی
+%%  طراحی شده برای قالب رسمی دانشگاه خوارزمی
+%% ============================================================================
+%%
+%%  توضیح:
+%%  این پیوست شامل اثبات‌های ریاضی تفصیلی، روابط تحلیلی، و جداول تکمیلی است
+%%  که برای حفظ یکپارچگی و روانی متن اصلی در فصول، به بخش پیوست‌ها منتقل شده‌اند.
+%% ============================================================================
+
+\chapter{اثبات قضیه‌ها و جزئیات محاسباتی}
+\label{app:proofs}
+
+در این پیوست، اثبات‌های دقیق ریاضی، روابط تحلیلی همگرایی الگوریتم‌های پیشنهادی و همچنین جزئیات جدول فراسنج‌های محاسباتی تشریح می‌گردد.
+
+\section{اثبات قضیه همگرایی کران‌دار}
+\label{sec:app_convergence}
+
+فرض کنید تابع هدف $f: \mathbb{R}^d \to \mathbb{R}$ تابعی محدب و مشتق‌پذیر با گرادیان لیپ‌شیتس به ثابت $L > 0$ باشد؛ یعنی به ازای هر $x, y \in \mathbb{R}^d$ داشته باشیم:
+\begin{equation}
+\label{eq:lipschitz}
+\|\nabla f(x) - \nabla f(y)\| \le L \|x - y\|
+\end{equation}
+
+بر اساس لم نزول (\lr{Descent Lemma})، برای هر $x, y \in \mathbb{R}^d$ نابرابری زیر برقرار است:
+\begin{equation}
+\label{eq:descent_lemma}
+f(y) \le f(x) + \langle \nabla f(x), y - x \rangle + \frac{L}{2} \|y - x\|^2
+\end{equation}
+
+اکنون قاعده به‌روزرسانی گرادیان با نرخ یادگیری $\eta$ را به صورت $x_{k+1} = x_k - \eta \nabla f(x_k)$ در نظر می‌گیریم. با جایگذاری $y = x_{k+1}$ در رابطه \eqref{eq:descent_lemma} به دست می‌آید:
+\begin{align}
+\label{eq:proof_step1}
+f(x_{k+1}) &\le f(x_k) - \eta \|\nabla f(x_k)\|^2 + \frac{L \eta^2}{2} \|\nabla f(x_k)\|^2 \nonumber\\
+&= f(x_k) - \eta \left(1 - \frac{L\eta}{2}\right) \|\nabla f(x_k)\|^2
+\end{align}
+
+چنانچه نرخ یادگیری در بازه $0 < \eta < \frac{2}{L}$ انتخاب شود، ضریب گرادیان اکیداً منفی بوده و دنباله مقادیر $\{f(x_k)\}$ یکنواخت نزولی و همگرا به نقطه کمینه سراسری خواهد بود.
+
+\section{جدول مقادیر و فراسنج‌های تجربی}
+\label{sec:app_params}
+
+در جدول \ref{tab:app_hyperparams}، مقادیر اولیه و بازه جستجوی فراسنج‌های مدل بهینه‌سازی آورده شده است.
+
+\begin{table}[H]
+\centering
+\caption{فراسنج‌های الگوریتم و تنظیمات شبیه‌سازی}
+\label{tab:app_hyperparams}
+\begin{tabular}{|l|c|c|p{6cm}|}
+\hline
+\textbf{فراسنج} & \textbf{نماد ریاضی} & \textbf{مقدار پیشنهادی} & \textbf{توضیحات و کاربرد} \\
+\hline
+نرخ یادگیری اولیه & $\eta_0$ & ۰/۰۰۱ & نرخ گام در گرادیان کاهشی \\
+ضریب ممان & $\beta_1$ & ۰/۹ & ضریب میانگین متحرک نمایی مرتبه اول \\
+ضریب مقیاس‌بندی & $\beta_2$ & ۰/۹۹۹ & ضریب میانگین مجذور گرادیان‌ها \\
+ثابت پایداری عددی & $\epsilon$ & $10^{-8}$ & جلوگیری از تقسیم بر صفر در مخرج کسر \\
+اندازه دسته داده & $B$ & ۶۴ & تعداد نمونه‌های مورد پردازش در هر تکرار \\
+تعداد کل دورها & $E$ & ۱۰۰ & دورهای کامل آموزش روی مجموعه داده \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{قطعه کد محاسبات کمکی}
+\label{sec:app_code}
+
+در ادامه، قطعه کد پیاده‌سازی تابع ارزیابی همگرایی در زبان پایتون نمایش داده شده است:
+
+\begin{latin}
+\begin{lstlisting}[language=Python, caption={Convergence Monitoring Implementation}]
+import numpy as np
+
+def check_convergence(grad_norm, tol=1e-5, max_iter=1000):
+    """
+    Evaluates gradient descent stopping criterion.
+    """
+    for iteration, g in enumerate(grad_norm):
+        if g < tol:
+            return True, iteration
+        if iteration >= max_iter:
+            break
+    return False, max_iter
+\end{lstlisting}
+\end{latin}

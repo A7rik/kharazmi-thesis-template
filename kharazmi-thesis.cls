@@ -59,6 +59,10 @@
 \RequirePackage{setspace}
 \RequirePackage{indentfirst}
 \RequirePackage{enumitem}
+\renewcommand{\labelitemi}{$\bullet$}
+\renewcommand{\labelitemii}{$-$}
+\renewcommand{\labelitemiii}{$\ast$}
+\renewcommand{\labelitemiv}{$\cdot$}
 \RequirePackage{fancyhdr}
 \RequirePackage{titlesec}
 \RequirePackage{titletoc}

@@ -53,6 +53,7 @@
 \else
   \if@usenazanin
     \settextfont[
+      Mapping=persian-digits,
       Scale=1.08,
       BoldFont={B Nazanin Bold},
       ItalicFont={B Nazanin},
@@ -63,11 +64,12 @@
     \setlatintextfont[Scale=0.875]{Times New Roman}
     \deflatinfont\enfullfont[Scale=1.0]{Times New Roman}
     \defpersianfont\titrfont[Scale=1.0, BoldFont={B Titr}]{B Titr}
-    \defpersianfont\zarfont[Scale=1.08]{B Zar}
-    \defpersianfont\nazaninfont[Scale=1.08]{B Nazanin}
+    \defpersianfont\zarfont[Mapping=persian-digits, Scale=1.08]{B Zar}
+    \defpersianfont\nazaninfont[Mapping=persian-digits, Scale=1.08]{B Nazanin}
   \else
     % Default: B Zar matching official guidelines Table 3-2
     \settextfont[
+      Mapping=persian-digits,
       Scale=1.08,
       BoldFont={B Zar Bold},
       ItalicFont={B Zar},
@@ -78,8 +80,8 @@
     \setlatintextfont[Scale=0.875]{Times New Roman}
     \deflatinfont\enfullfont[Scale=1.0]{Times New Roman}
     \defpersianfont\titrfont[Scale=1.0, BoldFont={B Titr}]{B Titr}
-    \defpersianfont\zarfont[Scale=1.08]{B Zar}
-    \defpersianfont\nazaninfont[Scale=1.08]{B Nazanin}
+    \defpersianfont\zarfont[Mapping=persian-digits, Scale=1.08]{B Zar}
+    \defpersianfont\nazaninfont[Mapping=persian-digits, Scale=1.08]{B Nazanin}
   \fi
 \fi
 
