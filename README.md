@@ -106,18 +106,20 @@ Kharazmi thesis template/
 
 > **نکته مهم:** حتماً از موتور کامپایل **XeLaTeX** استفاده نمایید. موتورهای قدیمی `pdflatex` یا `latex` قادر به پردازش خط فارسی و فونت‌های یونیکد نیستند.
 
-### ۲. قلم‌های مورد نیاز (Fonts)
-قالب به طور پیش‌فرض از قلم‌های استاندارد سری B مصوب دانشگاه خوارزمی استفاده می‌کند:
+### ۲. قلم‌های مورد نیاز (Fonts) — همراه با پروژه (Bundled)
+تمامی قلم‌های استاندارد و مصوب مورد نیاز دانشگاه خوارزمی به صورت کامل در پوشه `fonts/` در مخزن پروژه قرار داده شده‌اند و نیازی به دانلود یا نصب جداگانه آن‌ها بر روی سیستم‌عامل یا اورلیف وجود ندارد:
 - **قلم‌های فارسی:**
-  - `B Zar` و `B Zar Bold` (متن اصلی)
+  - `B Zar` و `B Zar Bold` (متن اصلی پایان‌نامه)
   - `B Titr Bold` (عناوین فصول و بخش‌ها)
-  - `B Nazanin` (در صورت انتخاب گزینه `bnazanin`)
-  - `IranNastaliq` (اختیاری برای صفحه بسم‌الله)
-- **قلم انگلیسی:**
-  - `Times New Roman` (به صورت پیش‌فرض در ویندوز و مک موجود است)
+  - `B Nazanin` و `B Nazanin Bold` (در صورت انتخاب گزینه `bnazanin`)
+  - `IranNastaliq` (برای صفحه بسم‌الله و زیبایی‌شناختی)
+- **قلم‌های انگلیسی:**
+  - `Times New Roman` (شامل Regular, Bold, Italic, Bold-Italic برای واژگان و پاورقی‌های انگلیسی)
 
-#### استفاده از قلم آزاد وزیرمتن (بدون نیاز به نصب فونت‌های سری B):
-در صورتی که در محیط‌های لینوکسی به قلم‌های سری B دسترسی ندارید، کافی است در فایل `main.tex` گزینه `vazirmatn` را فراخوانی کنید:
+> **یکپارچگی ۱۰۰٪ میان کامپیوتر شخصی و اورلیف:** قالب طوری پیکربندی شده است که در صورت وجود پوشه `fonts/`، فونت‌ها مستقیماً از همین پوشه بارگذاری می‌شوند؛ بنابراین خروجی حاصل در سیستم‌عامل‌های مختلف (ویندوز، مک، لینوکس) و همچنین در سامانه اورلیف کاملاً یکسان، بدون نقص و بدون هیچ‌گونه نیاز به نصب دستی فونت خواهد بود.
+
+#### استفاده اختیاری از قلم آزاد وزیرمتن:
+در صورتی که علاقه‌مند به استفاده از قلم مدرن **وزیرمتن (Vazirmatn)** به جای قلم‌های کلاسیک سری B باشید، کافی است در فایل `main.tex` گزینه `vazirmatn` را فعال نمایید:
 ```latex
 \usepackage[vazirmatn]{kharazmi}
 ```
@@ -127,21 +129,15 @@ Kharazmi thesis template/
 ## راهنمای کامپایل و ساخت سند
 
 ### ۱. استفاده آنلاین در سامانه اورلیف (Overleaf)
-اگر تمایل دارید بدون نیاز به نصب نرم‌افزار یا توزیع تک بر روی رایانه خود، پایان‌نامه را به صورت آنلاین در سامانه ابری [Overleaf](https://www.overleaf.com/) ویرایش و کامپایل نمایید، کافی است مراحل زیر را دنبال فرمایید:
+اگر تمایل دارید بدون نیاز به نصب نرم‌افزار یا توزیع تک بر روی رایانه خود، پایان‌نامه را به صورت آنلاین در سامانه ابری [Overleaf](https://www.overleaf.com/) ویرایش و کامپایل نمایید، تمامی فونت‌ها از قبل درون مخزن پروژه موجودند و نیازی به دانلود یا آپلود فونت اضافی ندارید. کافی است مراحل زیر را دنبال فرمایید:
 
-1. **آپلود پروژه:** پوشه پروژه را در قالب یک فایل فشرده `.zip` ذخیره کرده و در صفحه کاربری اورلیف از منوی **New Project** گزینه **Upload Project** را انتخاب کنید.
+1. **آپلود پروژه:** کل پوشه پروژه (شامل پوشه `fonts/`) را در قالب یک فایل فشرده `.zip` ذخیره کرده و در صفحه کاربری اورلیف از منوی **New Project** گزینه **Upload Project** را انتخاب کنید.
 2. **تغییر موتور کامپایل به XeLaTeX (الزامی):**
    - به طور پیش‌فرض، موتور کامپایل اورلیف بر روی `pdfLaTeX` تنظیم شده است که زبان فارسی و زی‌پرشین را پشتیبانی نمی‌کند.
    - از گوشه بالا سمت چپ صفحه ویرایشگر بر روی دکمه **Menu** کلیک کنید.
    - در پنجره بازشده و در بخش **Settings**، گزینه **Compiler** را از `pdfLaTeX` به **`XeLaTeX`** تغییر دهید.
    - بررسی نمایید که گزینه **TeX Live version** بر روی نسخه‌های جدید (2023 یا 2024) و گزینه **Main document** بر روی `main.tex` تنظیم باشد.
-3. **تنظیم قلم‌ها در اورلیف:**
-   - سرورهای اورلیف لینوکسی هستند و فونت‌های سری B ویندوز (مانند `B Zar` و `B Titr`) به‌صورت پیش‌فرض بر روی آن‌ها نصب نیست. برای حروف‌چینی بدون خطا، دو راهکار در اختیار دارید:
-     - **روش اول (پیشنهادی و بدون نیاز به آپلود فونت):** استفاده از قلم آزاد و استاندارد **وزیرمتن (Vazirmatn)** که به‌صورت پیش‌فرض روی مخازن اورلیف موجود است. کافی است در خط ۲۸ فایل `main.tex` گزینه `vazirmatn` را فراخوانی کنید:
-       ```latex
-       \usepackage[vazirmatn]{kharazmi}
-       ```
-     - **روش دوم (استفاده از قلم‌های سری B):** فایل‌های فونت دلخواه خود (`BZar.ttf`, `BTitrBold.ttf`) را در کنار سایر فایل‌ها در پروژه اورلیف خود آپلود نمایید.
+3. **عدم نیاز به تنظیم فونت:** به دلیل اینکه تمامی قلم‌های استاندارد (`B Zar`, `B Titr`, `Times New Roman`, `IranNastaliq`) مستقیماً درون پوشه `fonts/` پروژه گنجانده شده‌اند، نیازی به نصب قلم روی سرور اورلیف یا انجام هیچ تنظیم اضافی دیگری نیست. قالب به طور خودکار قلم‌ها را فراخوانی می‌کند.
 4. **ساخت سند:** با زدن دکمه سبز رنگ **Recompile**، پایان‌نامه با موفقیت کامپایل شده و خروجی در پنل سمت راست نمایش داده می‌شود.
 
 ---
@@ -399,11 +395,8 @@ def hello_world():
 - **علت:** عدم اجرای مرحله دوم یا سوم کامپایل.
 - **راه حل:** در لاتک برای ثبت دقیق شماره صفحات و فهرست‌ها، حداقل دو الی سه بار اجرای مجدد XeLaTeX لازم است.
 
-### ۴. فونت‌های سری B بر روی سیستم‌عامل من نصب نیستند.
-- **راه حل:** فایل فونت‌های سری B (`B Zar.ttf`, `B Titr.ttf`) را از اینترنت دانلود و در سیستم خود نصب نمایید، یا به راحتی گزینه `vazirmatn` را در `main.tex` فعال نمایید:
-  ```latex
-  \usepackage[vazirmatn]{kharazmi}
-  ```
+### ۴. آیا نیاز به نصب فونت‌های سری B روی سیستم‌عامل دارم؟
+- **راه حل:** خیر، هیچ نیازی به نصب قلم روی ویندوز، لینوکس، مک یا اورلیف ندارید. تمام قلم‌های لازم (`B Zar`، `B Titr`، `B Nazanin`، `IranNastaliq` و `Times New Roman`) درون پوشه `fonts/` در مخزن پروژه قرار داده شده‌اند و کامپایلر به طور خودکار آن‌ها را از درون همین پوشه می‌خواند.
 
 ---
 
@@ -416,14 +409,12 @@ This template is a comprehensive LaTeX thesis and dissertation template for **Kh
 1. Upload the project folder as a `.zip` archive to [Overleaf](https://www.overleaf.com/) via **New Project > Upload Project**.
 2. Open **Menu** (top left) and switch **Compiler** from `pdfLaTeX` to **`XeLaTeX`** (required for Persian XePersian support).
 3. Ensure **TeX Live version** is set to 2023 or 2024, and **Main document** is `main.tex`.
-4. Overleaf's Linux cloud servers do not include proprietary Windows fonts (`B Zar`, `B Titr`). You can either:
-   - **(Recommended)** Use the open-source **Vazirmatn** font already installed on Overleaf by setting `\usepackage[vazirmatn]{kharazmi}` in `main.tex`.
-   - Or upload your `.ttf` font files (`BZar.ttf`, `BTitrBold.ttf`) directly to the project root in Overleaf.
+4. **Zero-Configuration Fonts:** All standard required fonts (`B Zar`, `B Titr`, `B Nazanin`, `IranNastaliq`, and `Times New Roman`) are pre-bundled in the `fonts/` directory of the repository. No font uploads or local font installations are needed—rendering is 100% identical between local PCs and Overleaf out of the box.
 5. Click **Recompile** to build and preview the PDF.
 
 ### Prerequisites (Local Build)
 - **TeX Engine:** XeLaTeX (TeX Live 2022+ or MiKTeX 23+).
-- **Fonts:** B Zar, B Titr, and Times New Roman (or open-source `vazirmatn` font).
+- **Fonts:** Pre-bundled in `fonts/` (no manual installation required). Alternatively, you can use the open-source `vazirmatn` font option.
 
 ### Build Instructions (Command Line)
 To produce the complete thesis PDF with updated table of contents, citations, and indices, run the following multi-pass compilation:

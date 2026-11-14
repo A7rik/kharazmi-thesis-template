@@ -36,61 +36,124 @@
 % Full English page font: Times New Roman 12pt (Scale=1.0)
 % Heading fonts: B Titr, B Zar Bold
 % -----------------------------------------------------------------------------
-\if@usevazir
-  \settextfont[
-    Mapping=persian-digits,
-    Scale=1.0,
-    BoldFont={Vazirmatn Bold},
-    ItalicFont={Vazirmatn},
-    ItalicFeatures={FakeSlant=0.18},
-    BoldItalicFont={Vazirmatn Bold},
-    BoldItalicFeatures={FakeSlant=0.18}
-  ]{Vazirmatn}
-  \setlatintextfont[Scale=0.875]{Times New Roman}
-  \deflatinfont\enfullfont[Scale=1.0]{Times New Roman}
-  \defpersianfont\titrfont[Scale=1.0, BoldFont={Vazirmatn Bold}]{Vazirmatn Bold}
-  \defpersianfont\zarfont[Mapping=persian-digits, Scale=1.0, BoldFont={Vazirmatn Bold}]{Vazirmatn}
-  \defpersianfont\nazaninfont[Mapping=persian-digits, Scale=1.0, BoldFont={Vazirmatn Bold}]{Vazirmatn}
-\else
-  \if@usenazanin
+\IfFileExists{fonts/BZar.ttf}{%
+  % ---------------------------------------------------------------------------
+  % Bundled fonts (Path=fonts/) - Guaranteed identical rendering on Overleaf & PC
+  % ---------------------------------------------------------------------------
+  \if@usevazir
     \settextfont[
       Mapping=persian-digits,
-      Scale=1.08,
-      BoldFont={B Nazanin Bold},
-      ItalicFont={B Nazanin},
+      Scale=1.0,
+      BoldFont={Vazirmatn Bold},
+      ItalicFont={Vazirmatn},
       ItalicFeatures={FakeSlant=0.18},
-      BoldItalicFont={B Nazanin Bold},
+      BoldItalicFont={Vazirmatn Bold},
       BoldItalicFeatures={FakeSlant=0.18}
-    ]{B Nazanin}
-    \setlatintextfont[Scale=0.875]{Times New Roman}
-    \deflatinfont\enfullfont[Scale=1.0]{Times New Roman}
-    \defpersianfont\titrfont[Scale=1.0, BoldFont={B Titr}]{B Titr}
-    \defpersianfont\zarfont[Mapping=persian-digits, Scale=1.08, BoldFont={B Zar Bold}]{B Zar}
-    \defpersianfont\nazaninfont[Mapping=persian-digits, Scale=1.08, BoldFont={B Nazanin Bold}]{B Nazanin}
+    ]{Vazirmatn}
+    \setlatintextfont[Path=fonts/, Scale=0.875, BoldFont={timesbd.ttf}, ItalicFont={timesi.ttf}, BoldItalicFont={timesbi.ttf}]{times.ttf}
+    \deflatinfont\enfullfont[Path=fonts/, Scale=1.0, BoldFont={timesbd.ttf}, ItalicFont={timesi.ttf}, BoldItalicFont={timesbi.ttf}]{times.ttf}
+    \defpersianfont\titrfont[Scale=1.0, BoldFont={Vazirmatn Bold}]{Vazirmatn Bold}
+    \defpersianfont\zarfont[Path=fonts/, Mapping=persian-digits, Scale=1.08, BoldFont={BZarBd.ttf}]{BZar.ttf}
+    \defpersianfont\nazaninfont[Path=fonts/, Mapping=persian-digits, Scale=1.08, BoldFont={BNazaninBold.ttf}]{BNazanin.ttf}
   \else
-    % Default: B Zar matching official guidelines Table 3-2
+    \if@usenazanin
+      \settextfont[
+        Path=fonts/,
+        Mapping=persian-digits,
+        Scale=1.08,
+        BoldFont={BNazaninBold.ttf},
+        ItalicFont={BNazanin.ttf},
+        ItalicFeatures={FakeSlant=0.18},
+        BoldItalicFont={BNazaninBold.ttf},
+        BoldItalicFeatures={FakeSlant=0.18}
+      ]{BNazanin.ttf}
+      \setlatintextfont[Path=fonts/, Scale=0.875, BoldFont={timesbd.ttf}, ItalicFont={timesi.ttf}, BoldItalicFont={timesbi.ttf}]{times.ttf}
+      \deflatinfont\enfullfont[Path=fonts/, Scale=1.0, BoldFont={timesbd.ttf}, ItalicFont={timesi.ttf}, BoldItalicFont={timesbi.ttf}]{times.ttf}
+      \defpersianfont\titrfont[Path=fonts/, Scale=1.0, BoldFont={BTitrBd.ttf}]{BTitrBd.ttf}
+      \defpersianfont\zarfont[Path=fonts/, Mapping=persian-digits, Scale=1.08, BoldFont={BZarBd.ttf}]{BZar.ttf}
+      \defpersianfont\nazaninfont[Path=fonts/, Mapping=persian-digits, Scale=1.08, BoldFont={BNazaninBold.ttf}]{BNazanin.ttf}
+    \else
+      % Default: B Zar matching official guidelines Table 3-2
+      \settextfont[
+        Path=fonts/,
+        Mapping=persian-digits,
+        Scale=1.08,
+        BoldFont={BZarBd.ttf},
+        ItalicFont={BZar.ttf},
+        ItalicFeatures={FakeSlant=0.18},
+        BoldItalicFont={BZarBd.ttf},
+        BoldItalicFeatures={FakeSlant=0.18}
+      ]{BZar.ttf}
+      \setlatintextfont[Path=fonts/, Scale=0.875, BoldFont={timesbd.ttf}, ItalicFont={timesi.ttf}, BoldItalicFont={timesbi.ttf}]{times.ttf}
+      \deflatinfont\enfullfont[Path=fonts/, Scale=1.0, BoldFont={timesbd.ttf}, ItalicFont={timesi.ttf}, BoldItalicFont={timesbi.ttf}]{times.ttf}
+      \defpersianfont\titrfont[Path=fonts/, Scale=1.0, BoldFont={BTitrBd.ttf}]{BTitrBd.ttf}
+      \defpersianfont\zarfont[Path=fonts/, Mapping=persian-digits, Scale=1.08, BoldFont={BZarBd.ttf}]{BZar.ttf}
+      \defpersianfont\nazaninfont[Path=fonts/, Mapping=persian-digits, Scale=1.08, BoldFont={BNazaninBold.ttf}]{BNazanin.ttf}
+    \fi
+  \fi
+  \IfFileExists{fonts/IranNastaliq.ttf}{%
+    \defpersianfont\nastaliqfont[Path=fonts/, Scale=1.2]{IranNastaliq.ttf}%
+  }{%
+    \defpersianfont\nastaliqfont[Path=fonts/, Scale=1.08, BoldFont={BZarBd.ttf}]{BZar.ttf}%
+  }%
+}{%
+  % ---------------------------------------------------------------------------
+  % Fallback to system-installed fonts
+  % ---------------------------------------------------------------------------
+  \if@usevazir
     \settextfont[
       Mapping=persian-digits,
-      Scale=1.08,
-      BoldFont={B Zar Bold},
-      ItalicFont={B Zar},
+      Scale=1.0,
+      BoldFont={Vazirmatn Bold},
+      ItalicFont={Vazirmatn},
       ItalicFeatures={FakeSlant=0.18},
-      BoldItalicFont={B Zar Bold},
+      BoldItalicFont={Vazirmatn Bold},
       BoldItalicFeatures={FakeSlant=0.18}
-    ]{B Zar}
+    ]{Vazirmatn}
     \setlatintextfont[Scale=0.875]{Times New Roman}
     \deflatinfont\enfullfont[Scale=1.0]{Times New Roman}
-    \defpersianfont\titrfont[Scale=1.0, BoldFont={B Titr}]{B Titr}
-    \defpersianfont\zarfont[Mapping=persian-digits, Scale=1.08, BoldFont={B Zar Bold}]{B Zar}
-    \defpersianfont\nazaninfont[Mapping=persian-digits, Scale=1.08, BoldFont={B Nazanin Bold}]{B Nazanin}
+    \defpersianfont\titrfont[Scale=1.0, BoldFont={Vazirmatn Bold}]{Vazirmatn Bold}
+    \defpersianfont\zarfont[Mapping=persian-digits, Scale=1.0, BoldFont={Vazirmatn Bold}]{Vazirmatn}
+    \defpersianfont\nazaninfont[Mapping=persian-digits, Scale=1.0, BoldFont={Vazirmatn Bold}]{Vazirmatn}
+  \else
+    \if@usenazanin
+      \settextfont[
+        Mapping=persian-digits,
+        Scale=1.08,
+        BoldFont={B Nazanin Bold},
+        ItalicFont={B Nazanin},
+        ItalicFeatures={FakeSlant=0.18},
+        BoldItalicFont={B Nazanin Bold},
+        BoldItalicFeatures={FakeSlant=0.18}
+      ]{B Nazanin}
+      \setlatintextfont[Scale=0.875]{Times New Roman}
+      \deflatinfont\enfullfont[Scale=1.0]{Times New Roman}
+      \defpersianfont\titrfont[Scale=1.0, BoldFont={B Titr}]{B Titr}
+      \defpersianfont\zarfont[Mapping=persian-digits, Scale=1.08, BoldFont={B Zar Bold}]{B Zar}
+      \defpersianfont\nazaninfont[Mapping=persian-digits, Scale=1.08, BoldFont={B Nazanin Bold}]{B Nazanin}
+    \else
+      % Default: B Zar matching official guidelines Table 3-2
+      \settextfont[
+        Mapping=persian-digits,
+        Scale=1.08,
+        BoldFont={B Zar Bold},
+        ItalicFont={B Zar},
+        ItalicFeatures={FakeSlant=0.18},
+        BoldItalicFont={B Zar Bold},
+        BoldItalicFeatures={FakeSlant=0.18}
+      ]{B Zar}
+      \setlatintextfont[Scale=0.875]{Times New Roman}
+      \deflatinfont\enfullfont[Scale=1.0]{Times New Roman}
+      \defpersianfont\titrfont[Scale=1.0, BoldFont={B Titr}]{B Titr}
+      \defpersianfont\zarfont[Mapping=persian-digits, Scale=1.08, BoldFont={B Zar Bold}]{B Zar}
+      \defpersianfont\nazaninfont[Mapping=persian-digits, Scale=1.08, BoldFont={B Nazanin Bold}]{B Nazanin}
+    \fi
   \fi
-\fi
-
-% Nastaliq font (optional if available)
-\IfFontExistsTF{IranNastaliq}{%
-  \defpersianfont\nastaliqfont[Scale=1.2]{IranNastaliq}%
-}{%
-  \defpersianfont\nastaliqfont[Scale=1.08]{B Zar}%
+  \IfFontExistsTF{IranNastaliq}{%
+    \defpersianfont\nastaliqfont[Scale=1.2]{IranNastaliq}%
+  }{%
+    \defpersianfont\nastaliqfont[Scale=1.08]{B Zar}%
+  }%
 }
 
 % -----------------------------------------------------------------------------
