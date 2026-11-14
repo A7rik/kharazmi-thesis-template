@@ -96,51 +96,21 @@ Kharazmi thesis template/
 
 ---
 
-## پیش‌نیازهای سیستمی و قلم‌ها
-
-### ۱. توزیع تک (TeX Distribution)
-برای کامپایل این قالب، نصب یکی از توزیع‌های به‌روز زیر الزامی است:
-- **ویندوز (Windows):** [MiKTeX](https://miktex.org/) نسخه ۲۳ به بعد یا [TeX Live](https://www.tug.org/texlive/).
-- **لینوکس (Linux):** `texlive-full` (نسخه ۲۰۲۲ به بعد).
-- **مک (macOS):** [MacTeX](https://www.tug.org/mactex/).
-
-> **نکته مهم:** حتماً از موتور کامپایل **XeLaTeX** استفاده نمایید. موتورهای قدیمی `pdflatex` یا `latex` قادر به پردازش خط فارسی و فونت‌های یونیکد نیستند.
-
-### ۲. قلم‌های مورد نیاز (Fonts) — همراه با پروژه (Bundled)
-تمامی قلم‌های استاندارد و مصوب مورد نیاز دانشگاه خوارزمی به صورت کامل در پوشه `fonts/` در مخزن پروژه قرار داده شده‌اند و نیازی به دانلود یا نصب جداگانه آن‌ها بر روی سیستم‌عامل یا اورلیف وجود ندارد:
-- **قلم‌های فارسی:**
-  - `B Zar` و `B Zar Bold` (متن اصلی پایان‌نامه)
-  - `B Titr Bold` (عناوین فصول و بخش‌ها)
-  - `B Nazanin` و `B Nazanin Bold` (در صورت انتخاب گزینه `bnazanin`)
-  - `IranNastaliq` (برای صفحه بسم‌الله و زیبایی‌شناختی)
-- **قلم‌های انگلیسی:**
-  - `Times New Roman` (شامل Regular, Bold, Italic, Bold-Italic برای واژگان و پاورقی‌های انگلیسی)
-
-> **یکپارچگی ۱۰۰٪ میان کامپیوتر شخصی و اورلیف:** قالب طوری پیکربندی شده است که در صورت وجود پوشه `fonts/`، فونت‌ها مستقیماً از همین پوشه بارگذاری می‌شوند؛ بنابراین خروجی حاصل در سیستم‌عامل‌های مختلف (ویندوز، مک، لینوکس) و همچنین در سامانه اورلیف کاملاً یکسان، بدون نقص و بدون هیچ‌گونه نیاز به نصب دستی فونت خواهد بود.
-
-#### استفاده اختیاری از قلم آزاد وزیرمتن:
-در صورتی که علاقه‌مند به استفاده از قلم مدرن **وزیرمتن (Vazirmatn)** به جای قلم‌های کلاسیک سری B باشید، کافی است در فایل `main.tex` گزینه `vazirmatn` را فعال نمایید:
-```latex
-\usepackage[vazirmatn]{kharazmi}
-```
-
----
-
 ## راهنمای کامپایل و ساخت سند
 
-### ۱. استفاده آنلاین در سامانه اورلیف (Overleaf)
-اگر تمایل دارید بدون نیاز به نصب نرم‌افزار یا توزیع تک بر روی رایانه خود، پایان‌نامه را به صورت آنلاین در سامانه ابری [Overleaf](https://www.overleaf.com/) ویرایش و کامپایل نمایید، تمامی فونت‌ها از قبل درون مخزن پروژه موجودند و نیازی به دانلود یا آپلود فونت اضافی ندارید. کافی است مراحل زیر را دنبال فرمایید:
-
-1. **آپلود پروژه:** کل پوشه پروژه (شامل پوشه `fonts/`) را در قالب یک فایل فشرده `.zip` ذخیره کرده و در صفحه کاربری اورلیف از منوی **New Project** گزینه **Upload Project** را انتخاب کنید.
-2. **تغییر موتور کامپایل به XeLaTeX (الزامی):**
-   - به طور پیش‌فرض، موتور کامپایل اورلیف بر روی `pdfLaTeX` تنظیم شده است که زبان فارسی و زی‌پرشین را پشتیبانی نمی‌کند.
-   - از گوشه بالا سمت چپ صفحه ویرایشگر بر روی دکمه **Menu** کلیک کنید.
-   - در پنجره بازشده و در بخش **Settings**، گزینه **Compiler** را از `pdfLaTeX` به **`XeLaTeX`** تغییر دهید.
-   - بررسی نمایید که گزینه **TeX Live version** بر روی نسخه‌های جدید (2023 یا 2024) و گزینه **Main document** بر روی `main.tex` تنظیم باشد.
-3. **عدم نیاز به تنظیم فونت:** به دلیل اینکه تمامی قلم‌های استاندارد (`B Zar`, `B Titr`, `Times New Roman`, `IranNastaliq`) مستقیماً درون پوشه `fonts/` پروژه گنجانده شده‌اند، نیازی به نصب قلم روی سرور اورلیف یا انجام هیچ تنظیم اضافی دیگری نیست. قالب به طور خودکار قلم‌ها را فراخوانی می‌کند.
-4. **ساخت سند:** با زدن دکمه سبز رنگ **Recompile**، پایان‌نامه با موفقیت کامپایل شده و خروجی در پنل سمت راست نمایش داده می‌شود.
+> **استفاده آنلاین در اورلیف (Overleaf):**
+> اگر ترجیح می‌دهید بدون نصب نرم‌افزار، پایان‌نامه را به صورت آنلاین در [Overleaf](https://www.overleaf.com/) ویرایش نمایید، کافی است پوشه پروژه را در قالب یک فایل `.zip` در اورلیف آپلود کنید و از بخش **Menu** در گوشه بالا سمت چپ، گزینه **Compiler** را بر روی **`XeLaTeX`** قرار دهید. تمام قلم‌های مصوب دانشگاه در پوشه `fonts/` پروژه گنجانده شده‌اند و نیازی به هیچ تنظیم یا آپلود قلم دیگری ندارید.
 
 ---
+
+### ۱. پیش‌نیازهای کامپایل روی سیستم (توزیع تک و قلم‌ها)
+برای ساخت و ویرایش پایان‌نامه بر روی رایانه شخصی خود، به موارد زیر نیاز دارید:
+- **توزیع تک (TeX Distribution):**
+  - **ویندوز (Windows):** [MiKTeX](https://miktex.org/) نسخه ۲۳ به بعد (پیشنهادی) یا [TeX Live](https://www.tug.org/texlive/).
+  - **لینوکس (Linux):** `texlive-full` (نسخه ۲۰۲۲ به بعد).
+  - **مک (macOS):** [MacTeX](https://www.tug.org/mactex/).
+- **موتور کامپایل (Compiler):** حتماً **XeLaTeX** (موتورهای قدیمی `pdflatex` یا `latex` قادر به پردازش خط فارسی و فونت‌های یونیکد نیستند).
+- **قلم‌های مورد نیاز (Fonts):** تمامی قلم‌های مصوب دانشگاه (`B Zar`، `B Titr`، `B Nazanin`، `Times New Roman` و `IranNastaliq`) همراه پروژه و در پوشه `fonts/` قرار دارند و نیازی به نصب قلم بر روی ویندوز، لینوکس یا مک ندارید. (در صورت تمایل به استفاده از قلم مدرن وزیرمتن نیز می‌توانید گزینه `\usepackage[vazirmatn]{kharazmi}` را در `main.tex` فعال نمایید).
 
 ### ۲. کامپایل خودکار با یک دستور (اسکریپت PowerShell در ویندوز)
 برای راحتی دانشجویان، یک اسکریپت خودکار در ریشه پروژه قرار داده شده است. کافی است در محیط PowerShell دستور زیر را اجرا کنید:
@@ -405,20 +375,13 @@ def hello_world():
 ### Overview
 This template is a comprehensive LaTeX thesis and dissertation template for **Kharazmi University**, designed in compliance with the university's academic writing guidelines (1402 / 2024).
 
-### Using on Overleaf
-1. Upload the project folder as a `.zip` archive to [Overleaf](https://www.overleaf.com/) via **New Project > Upload Project**.
-2. Open **Menu** (top left) and switch **Compiler** from `pdfLaTeX` to **`XeLaTeX`** (required for Persian XePersian support).
-3. Ensure **TeX Live version** is set to 2023 or 2024, and **Main document** is `main.tex`.
-4. **Zero-Configuration Fonts:** All standard required fonts (`B Zar`, `B Titr`, `B Nazanin`, `IranNastaliq`, and `Times New Roman`) are pre-bundled in the `fonts/` directory of the repository. No font uploads or local font installations are needed—rendering is 100% identical between local PCs and Overleaf out of the box.
-5. Click **Recompile** to build and preview the PDF.
+### Quick Note for Overleaf Users
+If working on [Overleaf](https://www.overleaf.com/), upload the project as a `.zip` archive, open **Menu** (top left), and switch **Compiler** to **`XeLaTeX`**. All fonts are pre-bundled in `fonts/`, requiring zero font setup.
 
-### Prerequisites (Local Build)
-- **TeX Engine:** XeLaTeX (TeX Live 2022+ or MiKTeX 23+).
-- **Fonts:** Pre-bundled in `fonts/` (no manual installation required). Alternatively, you can use the open-source `vazirmatn` font option.
-
-### Build Instructions (Command Line)
-To produce the complete thesis PDF with updated table of contents, citations, and indices, run the following multi-pass compilation:
-
+### Local Compilation Guide
+1. **Prerequisites:** Install [MiKTeX](https://miktex.org/) (Windows) or [TeX Live](https://www.tug.org/texlive/) (Linux/macOS). All required fonts are pre-bundled in `fonts/`.
+2. **One-Click Build (Windows):** Run `.\build.ps1` (or `.\build.ps1 -Clean`).
+3. **Manual CLI Build:**
 ```bash
 xelatex -interaction=nonstopmode main.tex
 bibtex main
