@@ -1,9 +1,9 @@
-# قالب رسمی پایان‌نامه‌ها و رساله‌های دانشگاه خوارزمی (LaTeX)
+# قالب پایان‌نامه‌ها و رساله‌های دانشگاه خوارزمی (LaTeX)
 # Kharazmi University Persian LaTeX Thesis Template
 
-قالب رسمی، استاندارد و ماژولار حروف‌چینی پایان‌نامه‌ها و رساله‌های تحصیلات تکمیلی دانشگاه خوارزمی بر پایه موتور قدرتمند **XeLaTeX** و بسته بومی **XePersian**.
+قالب استاندارد، جامع و ماژولار حروف‌چینی پایان‌نامه‌ها و رساله‌های تحصیلات تکمیلی دانشگاه خوارزمی بر پایه موتور قدرتمند **XeLaTeX** و بسته بومی **XePersian**.
 
-این قالب با دقت کامل و بر اساس آخرین شیوه‌نامه مصوب نگارش پایان‌نامه‌ها و رساله‌های دانشگاه خوارزمی (سال ۱۴۰۲) و فایل الگوی رسمی دانشگاه (`thesis template1402.docx`) طراحی و پیاده‌سازی شده است.
+این قالب با دقت کامل و بر اساس آخرین شیوه‌نامه مصوب نگارش پایان‌نامه‌ها و رساله‌های دانشگاه خوارزمی (سال ۱۴۰۲) و فایل الگوی نگارش دانشگاه (`thesis template1402.docx`) طراحی و پیاده‌سازی شده است.
 
 ---
 
@@ -12,10 +12,12 @@
 2. [ساختار پوشه‌ها و پرونده‌ها](#ساختار-پوشهها-و-پروندهها)
 3. [پیش‌نیازهای سیستمی و قلم‌ها](#پیشنیازهای-سیستمی-و-قلمها)
 4. [راهنمای کامپایل و ساخت سند](#راهنمای-کامپایل-و-ساخت-سند)
-   - [کامپایل از طریق خط فرمان (CLI)](#۱-کامپایل-از-طریق-خط-فرمان-cli)
-   - [تنظیم در VS Code (افزونه LaTeX Workshop)](#۲-تنظیم-در-vs-code-افزونه-latex-workshop)
-   - [تنظیم در TeXstudio](#۳-تنظیم-در-texstudio)
-   - [کامپایل خودکار با latexmk](#۴-کامپایل-خودکار-با-latexmk)
+   - [استفاده آنلاین در سامانه اورلیف (Overleaf)](#۱-استفاده-آنلاین-در-سامانه-اورلیف-overleaf)
+   - [کامپایل خودکار با یک دستور (اسکریپت PowerShell در ویندوز)](#۲-کامپایل-خودکار-با-یک-دستور-اسکریپت-powershell-در-ویندوز)
+   - [کامپایل دستی از طریق خط فرمان (CLI)](#۳-کامپایل-دستی-از-طریق-خط-فرمان-cli)
+   - [تنظیم در VS Code (افزونه LaTeX Workshop)](#۴-تنظیم-در-vs-code-افزونه-latex-workshop)
+   - [تنظیم در TeXstudio](#۵-تنظیم-در-texstudio)
+   - [کامپایل خودکار با latexmk](#۶-کامپایل-خودکار-با-latexmk)
 5. [راهنمای شخصی‌سازی برای دانشجو](#راهنمای-شخصیسازی-برای-دانشجو)
    - [تنظیم مشخصات و فراداده‌ها](#۱-تنظیم-مشخصات-و-فرادادهها)
    - [افزودن و ویرایش فصول](#۲-افزودن-و-ویرایش-فصول)
@@ -23,6 +25,7 @@
    - [جدول‌ها، شکل‌ها و نمودارها](#۴-جدولها-شکلها-و-نمودارها)
    - [الگوریتم‌ها و قطعه‌کدها](#۵-الگوریتمها-و-قطعهکدها)
    - [مدیریت مراجع دوزبانه (فارسی و انگلیسی)](#۶-مدیریت-مراجع-دوزبانه-فارسی-و-انگلیسی)
+   - [درج نمایه موضوعی و الفبایی](#۷-درج-نمایه-موضوعی-و-الفبایی-index)
 6. [پرسش‌های متداول و عیب‌یابی (FAQ)](#پرسشهای-متداول-و-عیبیابی-faq)
 7. [English Quick Start Guide](#english-quick-start-guide)
 
@@ -59,12 +62,12 @@
 ```text
 Kharazmi thesis template/
 ├── kharazmi-thesis.cls        # کلاس اصلی سند لاتک (هندسه صفحه، قلم‌ها، سرصفحه‌ها)
-├── kharazmi.sty               # بسته استایل، فراداده‌ها و توابع تولید صفحات رسمی
+├── kharazmi.sty               # بسته استایل، فراداده‌ها و توابع تولید صفحات آغازین و پایانی
 ├── main.tex                   # فایل اصلی و ریشه کامپایل پایان‌نامه
 ├── references.bib             # بانک مراجع دوزبانه (فارسی و انگلیسی)
 ├── README.md                  # راهنمای جامع کاربری (پرونده حاضر)
-├── images/                    # تصاویر و نشان‌های رسمی
-│   ├── khu_logo.png           # نشان رسمی باکیفیت دانشگاه خوارزمی
+├── images/                    # تصاویر و نشان دانشگاه
+│   ├── khu_logo.png           # نشان (لوگوی) باکیفیت دانشگاه خوارزمی
 │   ├── besmellah.png          # خوشنویسی بسم‌الله الرحمن الرحیم (اختیاری)
 │   └── sample_fig.png         # نمونه تصویر برای فصل‌های آزمایشی
 ├── front/                     # صفحات آغازین (پیش از متن اصلی)
@@ -123,7 +126,27 @@ Kharazmi thesis template/
 
 ## راهنمای کامپایل و ساخت سند
 
-### ۱. کامپایل خودکار با یک دستور (اسکریپت PowerShell)
+### ۱. استفاده آنلاین در سامانه اورلیف (Overleaf)
+اگر تمایل دارید بدون نیاز به نصب نرم‌افزار یا توزیع تک بر روی رایانه خود، پایان‌نامه را به صورت آنلاین در سامانه ابری [Overleaf](https://www.overleaf.com/) ویرایش و کامپایل نمایید، کافی است مراحل زیر را دنبال فرمایید:
+
+1. **آپلود پروژه:** پوشه پروژه را در قالب یک فایل فشرده `.zip` ذخیره کرده و در صفحه کاربری اورلیف از منوی **New Project** گزینه **Upload Project** را انتخاب کنید.
+2. **تغییر موتور کامپایل به XeLaTeX (الزامی):**
+   - به طور پیش‌فرض، موتور کامپایل اورلیف بر روی `pdfLaTeX` تنظیم شده است که زبان فارسی و زی‌پرشین را پشتیبانی نمی‌کند.
+   - از گوشه بالا سمت چپ صفحه ویرایشگر بر روی دکمه **Menu** کلیک کنید.
+   - در پنجره بازشده و در بخش **Settings**، گزینه **Compiler** را از `pdfLaTeX` به **`XeLaTeX`** تغییر دهید.
+   - بررسی نمایید که گزینه **TeX Live version** بر روی نسخه‌های جدید (2023 یا 2024) و گزینه **Main document** بر روی `main.tex` تنظیم باشد.
+3. **تنظیم قلم‌ها در اورلیف:**
+   - سرورهای اورلیف لینوکسی هستند و فونت‌های سری B ویندوز (مانند `B Zar` و `B Titr`) به‌صورت پیش‌فرض بر روی آن‌ها نصب نیست. برای حروف‌چینی بدون خطا، دو راهکار در اختیار دارید:
+     - **روش اول (پیشنهادی و بدون نیاز به آپلود فونت):** استفاده از قلم آزاد و استاندارد **وزیرمتن (Vazirmatn)** که به‌صورت پیش‌فرض روی مخازن اورلیف موجود است. کافی است در خط ۲۸ فایل `main.tex` گزینه `vazirmatn` را فراخوانی کنید:
+       ```latex
+       \usepackage[vazirmatn]{kharazmi}
+       ```
+     - **روش دوم (استفاده از قلم‌های سری B):** فایل‌های فونت دلخواه خود (`BZar.ttf`, `BTitrBold.ttf`) را در کنار سایر فایل‌ها در پروژه اورلیف خود آپلود نمایید.
+4. **ساخت سند:** با زدن دکمه سبز رنگ **Recompile**، پایان‌نامه با موفقیت کامپایل شده و خروجی در پنل سمت راست نمایش داده می‌شود.
+
+---
+
+### ۲. کامپایل خودکار با یک دستور (اسکریپت PowerShell در ویندوز)
 برای راحتی دانشجویان، یک اسکریپت خودکار در ریشه پروژه قرار داده شده است. کافی است در محیط PowerShell دستور زیر را اجرا کنید:
 ```powershell
 .\build.ps1
@@ -133,7 +156,7 @@ Kharazmi thesis template/
 .\build.ps1 -Clean
 ```
 
-### ۲. کامپایل دستی از طریق خط فرمان (CLI)
+### ۳. کامپایل دستی از طریق خط فرمان (CLI)
 در صورتی که مایل به اجرای دستی مراحل در ترمینال یا سیستم‌عامل‌های لینوکس و مک هستید، دستورات زیر را به ترتیب اجرا نمایید:
 
 ```bash
@@ -155,7 +178,7 @@ xelatex -interaction=nonstopmode main.tex
 
 پس از پایان فرآیند، فایل خروجی با نام **`main.pdf`** تولید خواهد شد.
 
-### ۳. تنظیم در VS Code (افزونه LaTeX Workshop)
+### ۴. تنظیم در VS Code (افزونه LaTeX Workshop)
 اگر از ویرایشگر قدرتمند Visual Studio Code استفاده می‌کنید، تنظیمات زیر را به فایل `settings.json` خود اضافه نمایید تا با هر بار ذخیره، فرآیند کامل ساخت سند انجام پذیرد:
 
 ```json
@@ -202,14 +225,14 @@ xelatex -interaction=nonstopmode main.tex
 }
 ```
 
-### ۴. تنظیم در TeXstudio
+### ۵. تنظیم در TeXstudio
 ۱. از منوی بالا به مسیر `Options` > `Configure TeXstudio` > `Build` بروید.
 ۲. گزینه `Default Compiler` را بر روی **`XeLaTeX`** تنظیم کنید.
 ۳. گزینه `Default Bibliography Tool` را بر روی **`BibTeX`** قرار دهید.
 ۴. گزینه `Default Index Tool` را بر روی **`MakeIndex`** قرار دهید.
 ۵. کلید `F5` را جهت کامپایل و مشاهده خروجی فشار دهید.
 
-### ۵. کامپایل خودکار با latexmk
+### ۶. کامپایل خودکار با latexmk
 پرونده پیکربندی `.latexmkrc` در ریشه پروژه قرار دارد. کافی است دستور زیر را در خط فرمان اجرا نمایید:
 ```bash
 latexmk -pdf -xelatex main.tex
@@ -387,9 +410,18 @@ def hello_world():
 ## English Quick Start Guide
 
 ### Overview
-This template is the official LaTeX thesis and dissertation template for **Kharazmi University**, designed in compliance with the university's academic writing guidelines (1402 / 2024).
+This template is a comprehensive LaTeX thesis and dissertation template for **Kharazmi University**, designed in compliance with the university's academic writing guidelines (1402 / 2024).
 
-### Prerequisites
+### Using on Overleaf
+1. Upload the project folder as a `.zip` archive to [Overleaf](https://www.overleaf.com/) via **New Project > Upload Project**.
+2. Open **Menu** (top left) and switch **Compiler** from `pdfLaTeX` to **`XeLaTeX`** (required for Persian XePersian support).
+3. Ensure **TeX Live version** is set to 2023 or 2024, and **Main document** is `main.tex`.
+4. Overleaf's Linux cloud servers do not include proprietary Windows fonts (`B Zar`, `B Titr`). You can either:
+   - **(Recommended)** Use the open-source **Vazirmatn** font already installed on Overleaf by setting `\usepackage[vazirmatn]{kharazmi}` in `main.tex`.
+   - Or upload your `.ttf` font files (`BZar.ttf`, `BTitrBold.ttf`) directly to the project root in Overleaf.
+5. Click **Recompile** to build and preview the PDF.
+
+### Prerequisites (Local Build)
 - **TeX Engine:** XeLaTeX (TeX Live 2022+ or MiKTeX 23+).
 - **Fonts:** B Zar, B Titr, and Times New Roman (or open-source `vazirmatn` font).
 
